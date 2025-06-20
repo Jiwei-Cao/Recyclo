@@ -36,7 +36,7 @@ transform = transforms.Compose([
     transforms.toTensor()
 ])
 
-def predict(img_bytes: bytes, model: torch.nn.Module) -> str:
+def predict_image(img_bytes: bytes, model: torch.nn.Module) -> str:
     img = Image.open(io.BytesIO(img_bytes)).convert("RGB")
     x = transform(img).unsqueeze(0).to(DEVICE)
 
