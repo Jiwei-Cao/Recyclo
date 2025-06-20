@@ -1,33 +1,47 @@
+__version__ = "0.1.0"
+
 import torch 
 from torchvision import models, transforms
 from pathlib import Path
 from PIL import Image
+import io
 
-__version__ = "0.1.0"
+CLASS_NAMES = ['cardboard', 'glass', 'metal', 'paper', 'plastic', 'trash']
+MODEL_PATH = Path(__file__).resolve().parent / "reyclo_model.pth"
+DEVICE = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
-BASE_DIR = Path(__file__).resolve().parent
-MODEL_PATH = BASE_DIR / "reyclo_model.pth"
-class_names = ['cardboard', 'glass', 'metal', 'paper', 'plastic', 'trash']
+def load_model(num_classes: int=6):
+    """
+    Instantiates the EfficientNet-B2, loads the fine-tuned weights
+    and puts it in eval() mode on the correct device
+    """
+    model = models.efficientnet_b2(weights=None)
+    in_feats = model.classifier[1].in_features
+
+    model.classifier = torch.nn.Sequential(
+        torch.nn.Dropout(p=0.3, inplace=True),
+        torch.nn.Linear(in_features=in_feats, out_features=num_classes)
+    )
+
+    state_dict = torch.load(MODEL_PATH, map_location=DEVICE)
+    model.load_state_dict(state_dict)
+
+    model.to(DEVICE)
+    model.eval()
+
+    return model
 
 transform = transforms.Compose([
     transforms.Resize((260, 260)),
     transforms.toTensor()
 ])
 
-def load_model(model_path=MODEL_PATH):
-    model = torch.load(model_path, map_location=torch.device("cpu"))
-    model.eval()
+def predict(img_bytes: bytes, model: torch.nn.Module) -> str:
+    img = Image.open(io.BytesIO(img_bytes)).convert("RGB")
+    x = transform(img).unsqueeze(0).to(DEVICE)
 
-    return model
-    
-model = load_model()
+    with torch.inference_mode():
+        logits = model(x)
+        pred_idx = logits.argmax(dim=1).item()
 
-def predict(image_path: str) -> str:
-    image = image.open(image_path).convert("RGB")
-    input_tensor = transform(image).unsqueeze(0)
-
-    with torch.no_grad():
-        outputs = model(input_tensor)
-        predicted_idx = outputs.argmax(dim=1).item()
-
-    return class_names[predicted_idx]
+    return CLASS_NAMES[pred_idx]
