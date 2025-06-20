@@ -1,6 +1,6 @@
 from fastapi import FastAPI, File, UploadFile
 from pydantic import BaseModel
-from model.model import load_model, predict_image, __version__ as model_version
+from app.model.model import load_model, predict_image, __version__ as model_version
 
 app = FastAPI()
 model = load_model()
