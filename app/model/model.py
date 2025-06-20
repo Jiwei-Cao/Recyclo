@@ -7,7 +7,7 @@ from PIL import Image
 import io
 
 CLASS_NAMES = ['cardboard', 'glass', 'metal', 'paper', 'plastic', 'trash']
-MODEL_PATH = Path(__file__).resolve().parent / "recyclo_model.pth"
+MODEL_PATH = Path(__file__).resolve().parent / "recyclo_model-0.1.0.pth"
 DEVICE = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
 def load_model(num_classes: int=6):
