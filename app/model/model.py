@@ -7,7 +7,7 @@ from PIL import Image
 import io
 
 CLASS_NAMES = ['cardboard', 'glass', 'metal', 'paper', 'plastic', 'trash']
-MODEL_PATH = Path(__file__).resolve().parent / "reyclo_model.pth"
+MODEL_PATH = Path(__file__).resolve().parent / "recyclo_model.pth"
 DEVICE = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
 def load_model(num_classes: int=6):
@@ -33,7 +33,7 @@ def load_model(num_classes: int=6):
 
 transform = transforms.Compose([
     transforms.Resize((260, 260)),
-    transforms.toTensor()
+    transforms.ToTensor()
 ])
 
 def predict_image(img_bytes: bytes, model: torch.nn.Module) -> str:
