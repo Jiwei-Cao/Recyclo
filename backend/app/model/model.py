@@ -42,6 +42,8 @@ def predict_image(img_bytes: bytes, model: torch.nn.Module) -> str:
 
     with torch.inference_mode():
         logits = model(x)
-        pred_idx = logits.argmax(dim=1).item()
+        pred_probs = torch.softmax(logits, dim=1)
+        confidence, pred_idx = pred_probs.max(dim=1)
 
-    return CLASS_NAMES[pred_idx]
+    label = CLASS_NAMES[pred_idx.item()]
+    return label, confidence.item()

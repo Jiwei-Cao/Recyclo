@@ -8,10 +8,10 @@ model = load_model()
 
 class PredictionOut(BaseModel):
     label: str
+    confidence: float
 
-origins = [ # quickly deploy frontend to vercel with just a single working page or placeholder so that front and back end can talk to each other 
-    "*",
-    # "https://your-vercel-app.vercel.app"
+origins = [ 
+    "https://recyclo-ai.vercel.app/"
 ]
 
 app.add_middleware(
@@ -32,5 +32,5 @@ async def predict(file: UploadFile = File(...)):
     Accepts form-upload of an iamge file, returns JSON { "label": "<pred>" }.
     """
     img_bytes = await file.read()
-    pred_label = predict_image(img_bytes, model)
-    return PredictionOut(label=pred_label)
+    pred_label, pred_prob = predict_image(img_bytes, model)
+    return PredictionOut(label=pred_label, confidence=pred_prob)
