@@ -1,4 +1,5 @@
 from fastapi import FastAPI, File, UploadFile
+from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 from app.model.model import load_model, predict_image, __version__ as model_version
 
@@ -8,9 +9,22 @@ model = load_model()
 class PredictionOut(BaseModel):
     label: str
 
+origins = [ # quickly deploy frontend to vercel with just a single working page or placeholder so that front and back end can talk to each other 
+    "*",
+    # "https://your-vercel-app.vercel.app"
+]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"]
+)
+
 @app.get("/")
 def home():
-    return {"message": "API is running", "model_version": model_version}
+    return {"health_check": "API is running", "model_version": model_version}
 
 @app.post("/predict", response_model=PredictionOut)
 async def predict(file: UploadFile = File(...)):
