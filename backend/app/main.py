@@ -1,3 +1,4 @@
+import os
 from fastapi import FastAPI, File, UploadFile
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
@@ -10,8 +11,9 @@ class PredictionOut(BaseModel):
     label: str
     confidence: float
 
-origins = [ 
-    "https://recyclo-ai.vercel.app/"
+origins = [
+    "https://recyclo-ai.vercel.app",
+    "https://recyclo-beige.vercel.app"
 ]
 
 app.add_middleware(

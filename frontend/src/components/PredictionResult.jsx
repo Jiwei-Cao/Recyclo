@@ -13,7 +13,7 @@ const PredictionResult = ({ result }) => {
                 <p>We're unable to confidently classify this image. Please try a clearer image.</p>
             ) : (
                 <>
-                    <p>Class: {result.class}</p>
+                    <p>Class: {result.label}</p>
                     <p>Confidence: {(confidence * 100).toFixed(2)}%</p>
                 </>
             )}
