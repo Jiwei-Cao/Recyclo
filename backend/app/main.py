@@ -12,8 +12,7 @@ class PredictionOut(BaseModel):
     confidence: float
 
 origins = [
-    "https://recyclo-ai.vercel.app",
-    "https://recyclo-beige.vercel.app"
+    "*"
 ]
 
 app.add_middleware(
