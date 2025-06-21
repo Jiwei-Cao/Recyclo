@@ -20,3 +20,5 @@ const PredictionResult = ({ result }) => {
         </div>
     );
 };
+
+export default PredictionResult
