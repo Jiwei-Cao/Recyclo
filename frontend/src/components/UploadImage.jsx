@@ -31,19 +31,17 @@ const UploadImage = ({ onResult, darkMode}) => {
     ${darkMode ? 'focus:ring-green-300' : 'focus:ring-green-500'}
     `
 
-    const filePickerClasses = darkMode
-    ? `
-      ${inputBase}
-      ml-10 align-middle
-      file:mr-4 file:py-2 file:px-4 file:rounded-full file:border file:border-gray-600
-      file:bg-green-800 file:text-green-200 hover:file:bg-green-700
+    const filePickerClasses = `
+        ${inputBase}
+        ml-10 align-middle
+        file:mr-4 file:py-2 file:px-4 file:rounded-full
+
+        ${darkMode
+            ? 'file:border file:border-gray-600 file:bg-green-800 file:text-green-200 hover:file:bg-green-700'
+            : 'file:border-0 file:bg-green-100 file:text-green-700 hover:file:bg-green-200'
+        }
     `
-    : `
-      ${inputBase}
-      ml-10 align-middle
-      file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0
-      file:bg-green-100 file:text-green-700 hover:file:bg-green-200
-    `
+
 
     const buttonClasses = `
     flex items-center justify-center py-2 px-6 rounded font-semibold transition-colors duration-300
