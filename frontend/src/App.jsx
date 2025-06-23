@@ -8,22 +8,24 @@ function App() {
   const [darkMode, setDarkMode] = useState(false);
 
   const containerClasses = `
-    relative flex flex-col items-center justify-center p-6 min-h-screen
+    relative flex flex-col items-center justify-center 
+    p-6 min-h-screen transition-colors duration-300
     ${darkMode
-      ? 'dark:bg-gray-900'
-      : 'bg-gray-100'}
+      ? 'dark:bg-gray-900 text-white border-gray-700 shadow-none'
+      : 'bg-gray-100 text-black border-gray-200 shadow-lg'}
   `
-
   return (
     <div className={containerClasses}>
       <ThemeToggle darkMode={darkMode} setDarkMode={setDarkMode} />
 
-      <h1 className="text-3xl font-bold text-green-600 dark:text-green-400 mb-6">
+      <h1 className={`text-3xl font-bold mb-6 ${
+        darkMode ? 'text-green-400' : 'text-green-600'
+      }`}>
         ♻️ Recyclo Waste Classifier
       </h1>
 
-      <UploadImage onResult={setPrediction} />
-      <PredictionResult result={prediction} />
+      <UploadImage onResult={setPrediction} darkMode={darkMode}/>
+      <PredictionResult result={prediction} darkMode={darkMode}/>
     </div>
   )
 }
