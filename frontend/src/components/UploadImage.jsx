@@ -39,7 +39,6 @@ const UploadImage = ({ onResult }) => {
                    hover:file:bg-green-200"
             />
 
-
             <button 
                 type="submit"
                 disabled={loading}

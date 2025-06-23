@@ -1,5 +1,9 @@
 import React from 'react';
 
+function capitalize(str) {
+    return str.charAt(0).toUpperCase() + str.slice(1);
+}
+
 const PredictionResult = ({ result }) => {
     if (!result) return null;
 
@@ -12,8 +16,8 @@ const PredictionResult = ({ result }) => {
                 <p className="text-red-600 mt-2">We're unable to confidently classify this image. Please try a clearer image.</p>
             ) : (
                 <>
-                    <p className="mt-2">Class: <span className="font-bold">{result.label}</span></p>
-                    <p>Confidence: <span className="font-bold">{(result.confidence * 100).toFixed(2)}%</span></p>
+                    <p className="mt-2">Detected Waste: <span className="font-bold">{capitalize(result.label)}</span></p>
+                    {/* <p>Confidence: <span className="font-bold">{(result.confidence * 100).toFixed(2)}%</span></p> */}
                 </>
             )}
         </div>
