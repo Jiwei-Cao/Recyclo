@@ -3,18 +3,17 @@ import React from 'react';
 const PredictionResult = ({ result }) => {
     if (!result) return null;
 
-    const confidence = result.confidence; 
-    const isUnsure = confidence < 0.15;
+    const isUnsure = result.confidence < 0.15;
 
     return (
-        <div>
-            <h3>Prediction Result</h3>
+        <div className="mt-6 bg-white shadow-md rounded p-4 text-center">
+            <h2 className="text-lg font-semibold text-gray-800">Prediction Result</h2>
             {isUnsure ? (
-                <p>We're unable to confidently classify this image. Please try a clearer image.</p>
+                <p className="text-red-600 mt-2">We're unable to confidently classify this image. Please try a clearer image.</p>
             ) : (
                 <>
-                    <p>Class: {result.label}</p>
-                    <p>Confidence: {(confidence * 100).toFixed(2)}%</p>
+                    <p className="mt-2">Class: <span className="font-bold">{result.label}</span></p>
+                    <p>Confidence: <span className="font-bold">{(result.confidence * 100).toFixed(2)}%</span></p>
                 </>
             )}
         </div>
