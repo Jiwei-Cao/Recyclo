@@ -37,7 +37,7 @@ const UploadImage = ({ onResult, darkMode}) => {
         file:mr-4 file:py-2 file:px-4 file:rounded-full
 
         ${darkMode
-            ? 'file:border file:border-gray-600 file:bg-green-800 file:text-green-200 hover:file:bg-green-700'
+            ? 'file:border-0 file:border-gray-600 file:bg-green-800 file:text-green-200 hover:file:bg-green-700'
             : 'file:border-0 file:bg-green-100 file:text-green-700 hover:file:bg-green-200'
         }
     `
