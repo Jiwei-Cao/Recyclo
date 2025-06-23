@@ -10,8 +10,8 @@ function App() {
   const containerClasses = `
     relative flex flex-col items-center justify-center p-6 min-h-screen
     ${darkMode
-      ? 'dark:bg-gray-900 dark:text-white'
-      : 'bg-gray-100 text-black'}
+      ? 'dark:bg-gray-900'
+      : 'bg-gray-100'}
   `
 
   return (
