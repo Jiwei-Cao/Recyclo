@@ -2,19 +2,16 @@ import React from 'react'
 
 export default function ThemeToggle({ darkMode, setDarkMode }) {
 
-  const wrapperClasses = `
-    absolute top-4 right-4 flex items-center space-x-2
-  `
+  const wrapperClasses = `absolute top-4 right-4 flex items-center space-x-2`
 
   const iconClasses = `
-    text-sm text-gray-700 
-  ` 
-  
-  const inputClasses = `
-    sr-only peer
+    text-sm transition-colors duration-300
+    ${darkMode ? 'text-gray-300' : 'text-gray-600'}
   `
 
-  const trackbase = `
+  const inputClasses = `sr-only peer`
+
+  const trackBase = `
     w-11 h-6 rounded-full peer
     bg-gray-300 peer-checked:bg-green-500
     peer-focus:ring-2 peer-focus:ring-green-500
@@ -27,7 +24,7 @@ export default function ThemeToggle({ darkMode, setDarkMode }) {
     peer-checked:after:translate-x-full peer-checked:after:border-white
   `
 
-  const switchClasses = `${trackbase} ${thumbBase}`
+  const switchClasses = `${trackBase} ${thumbBase}`
 
   return (
     <div className={wrapperClasses}>
@@ -43,8 +40,8 @@ export default function ThemeToggle({ darkMode, setDarkMode }) {
         />
         <div className={switchClasses} />
       </label>
-      
-      <span className="text-sm text-gray-700">🌙</span>
+
+      <span className={iconClasses}>🌙</span>
     </div>
   )
 }

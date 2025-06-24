@@ -29,12 +29,14 @@ const UploadImage = ({ onResult, darkMode}) => {
     py-2 px-6 rounded-full font-semibold
     bg-green-100 text-green-700 border border-green-400
     hover:bg-green-200 focus:outline-none focus:ring-2 focus:ring-green-500
+    transition-colors duration-300
     `
 
     const fileButtonDark = `
     py-2 px-6 rounded-full font-semibold
     bg-green-800 text-green-200 border border-green-600
     hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-300
+    transition-colors duration-300
     `
 
     const fileButtonClasses = darkMode ? fileButtonDark : fileButtonLight;
