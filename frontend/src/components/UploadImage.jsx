@@ -25,43 +25,53 @@ const UploadImage = ({ onResult, darkMode}) => {
         }
     };
 
-    const inputBase = `
-    block 2-full text-sm
-    focus:outline-none focus:ring-2 focus:ring-offset-2 
-    ${darkMode ? 'focus:ring-green-300' : 'focus:ring-green-500'}
+    const fileButtonLight = `
+    py-2 px-6 rounded-full font-semibold
+    bg-green-100 text-green-700 border border-green-400
+    hover:bg-green-200 focus:outline-none focus:ring-2 focus:ring-green-500
     `
 
-    const filePickerClasses = `
-        ${inputBase}
-        ml-10 align-middle
-        file:mr-4 file:py-2 file:px-4 file:rounded-full
-
-        ${darkMode
-            ? 'file:border-0 file:border-gray-600 file:bg-green-800 file:text-green-200 hover:file:bg-green-700'
-            : 'file:border-0 file:bg-green-100 file:text-green-700 hover:file:bg-green-200'
-        }
+    const fileButtonDark = `
+    py-2 px-6 rounded-full font-semibold
+    bg-green-800 text-green-200 border border-green-600
+    hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-300
     `
 
+    const fileButtonClasses = darkMode ? fileButtonDark : fileButtonLight;
 
-    const buttonClasses = `
-    flex items-center justify-center py-2 px-6 rounded font-semibold transition-colors duration-300
-    focus:outline-none focus:ring-2 focus:ring-offset-2
-    ${loading ? 'opacity-50 cursor-not-allowed' : darkMode
-      ? 'bg-green-500 text-gray-900 hover:bg-green-600 focus:ring-green-300'
-      : 'bg-green-600 text-white hover:bg-green-700 focus:ring-green-500'}
+    const buttonBase = `
+        flex items-center justify-center
+        py-2 px-6 rounded font-semibold
+        transition-colors duration-300
+        focus:outline-none focus:ring-2 focus:ring-offset-2
     `
 
+    const buttonState = loading 
+        ? 'opacity-50 cursor-not-allowed' 
+        : darkMode
+        ? 'bg-green-500 text-gray-900 hover:bg-green-600 focus:ring-green-300'
+        : 'bg-green-600 text-white hover:bg-green-700 focus:ring-green-500'
+
+    const buttonClasses = `${buttonBase} ${buttonState}`
 
     return (
-        <form onSubmit={handleSubmit} className="flex flex-col items-center space-y-4">
-            <input 
-            type="file" 
-            accept="image/*" 
-            onChange={(e) => setFile(e.target.files[0])}  
-            className={filePickerClasses}
-            />
-
-            <button type="submit" disabled={loading}className={buttonClasses}>
+        <form onSubmit={handleSubmit} className="flex flex-col items-center w-full max-w-sm space-y-3 sm:space-y-4">
+            <div className="flex items-center justify-center w-full gap-3">
+                <label htmlFor="file-upload" className={`cursor-pointer ${fileButtonClasses} mb-0`}>
+                    Choose file
+                </label>
+                <input
+                    id="file-upload"
+                    type="file"
+                    title="Upload an image"
+                    aria-label="Upload image file"
+                    accept="image/*"
+                    onChange={(e) => setFile(e.target.files[0])}
+                    className="hidden"
+                />
+                <span className="text-center">{file ? file.name : 'No file chosen'}</span>
+            </div>
+            <button type="submit" disabled={loading} className={buttonClasses}>
                 {loading ? (
                     <>
                         <svg
@@ -70,7 +80,7 @@ const UploadImage = ({ onResult, darkMode}) => {
                             fill="none"
                             viewBox="0 0 24 24"
                         >
-                            <circle 
+                            <circle
                                 className="opacity-25"
                                 cx="12" cy="12" r="10"
                                 stroke="currentColor"
@@ -84,7 +94,7 @@ const UploadImage = ({ onResult, darkMode}) => {
                         </svg>
                         Processing...
                     </>
-                ) :(
+                ) : (
                     'Classify Waste'
                 )}
             </button>
