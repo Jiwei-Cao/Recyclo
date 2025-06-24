@@ -22,24 +22,23 @@ const PredictionResult = ({ result, darkMode }) => {
     `
     
     const messageClasses = isUnsure
-    ? `mt-2 font-medium ${
-        darkMode ? 'text-red-400' : 'text-red-600'
-      }`
+    ? `mt-2 font-medium ${darkMode ? 'text-red-400' : 'text-red-600'}`
     : `mt-2 ${darkMode ? 'text-gray-300' : 'text-gray-700'}
     `
 
 
     return (
-        <div className="containerClasses">
-            <h2 className="titleClasses">Prediction Result</h2>
+        <div className={containerClasses}>
+            <h2 className={titleClasses}>Prediction Result</h2>
 
             {isUnsure ? (
-                <p className="messageClasses">
+                <p className={messageClasses}>
                     We're unable to confidently classify this image. Please try a clearer image.
                 </p>
             ) : (
                 <p className={messageClasses}>
-                    Detected Waste: <span className="font-bold">{capitalize(result.label)}</span>
+                    Detected Waste:{' '}
+                    <span className="font-bold">{capitalize(result.label)}</span>
                 </p>
             )}
         </div>
