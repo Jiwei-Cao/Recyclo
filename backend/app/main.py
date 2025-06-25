@@ -48,40 +48,6 @@ def get_current_user(
     if not creds:
         raise HTTPException(status.HTTP_401_UNAUTHORIZED, detail="Invalid or expired token")
     return creds
-    
-@app.post("/register", status_code=status.HTTP_201_CREATED)
-def register(
-    data: Annotated[UserCreate, Depends()],
-    db: Annotated[Session, Depends(get_db)]
-):
-    """
-    Register a new user.
-    """
-    if db.query(User).filter(User.email == data.email).first():
-        raise HTTPException(status.HTTP_400_BAD_REQUEST, detail="Email already registered")
-
-    hashed_pw = get_password_hash(data.password)
-    user = User(username=data.username, email=data.email, hashed_password=hashed_pw)
-    db.add(user); db.commit(); db.refresh(user)
-    
-    return {"message": "User registered successfully", "user_id": user.id}
-
-@app.post("/login", response_model=TokenOut)
-def login(
-    form_data: Annotated[OAuth2PasswordRequestForm, Depends()],
-    db: Annotated[Session, Depends(get_db)]
-):
-    user = db.query(User).filter(User.email == form_data.username).first()
-    if not user or not verify_password(form_data.password, user.hashed_password):
-        raise HTTPException(status.HTTP_401_UNAUTHORIZED, detail="Invalid credentials")
-    
-    token = create_access_token({
-        "user_id": user.id,
-        "username": user.username,
-        "email": user.email
-    }, expires_delta=timedelta(days=1))
-
-    return TokenOut(access_token=token)
 
 
 @app.post("/predict", response_model=PredictionOut)
