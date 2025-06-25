@@ -1,21 +1,14 @@
-from fastapi import FastAPI, File, UploadFile, HTTPException, Depends, status
+from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from pydantic import BaseModel, EmailStr
-from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm
-from app.model.model import load_model, predict_image, __version__ as model_version
-from typing import Annotated
-import models
-from models import User, RecyclingLog
-from database import engine, SessionLocal
-from sqlalchemy import func 
-from sqlalchemy.orm import Session
-from auth.token import create_access_token, verify_access_token, TokenData
-from auth.hashing import get_password_hash, verify_password
-from datetime import timedelta, date
+
+from app.database import engine, Base
+from app.auth.routes import router as auth_router
+from app.predict.routes import router as predict_router
+from app.logs.routes import router as logs_router
 
 app = FastAPI()
-models.Base.metadata.create_all(bind=engine)
-model = load_model()
+
+Base.metadata.create_all(bind=engine)
 
 origins = [
     "https://recyclo-ai.vercel.app",
@@ -31,9 +24,6 @@ app.add_middleware(
     allow_headers=["*"]
 )
 
-def get_db():
-    db = SessionLocal()
-    try:
-        yield db 
-    finally:
-        db.close()
+app.include_router(auth_router, tags=["auth"])
+app.include_router(predict_router, tags=["predict"])
+app.include_router(logs_router, tags=["logs"])
