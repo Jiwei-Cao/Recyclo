@@ -9,11 +9,10 @@ from app.schemas.auth import UserCreate, TokenOut
 from app.auth.hashing import get_password_hash, verify_password
 from app.auth.token import create_access_token
 
-@app.post("/register", status_code=status.HTTP_201_CREATED)
-def register(
-    data: Annotated[UserCreate, Depends()],
-    db: Annotated[Session, Depends(get_db)]
-):
+router = APIRouter()
+
+@router.post("/register", status_code=status.HTTP_201_CREATED)
+def register(data: UserCreate, db: Session = Depends(get_db)):
     """
     Register a new user.
     """
@@ -26,10 +25,10 @@ def register(
     
     return {"message": "User registered successfully", "user_id": user.id}
 
-@app.post("/login", response_model=TokenOut)
+@router.post("/login", response_model=TokenOut)
 def login(
-    form_data: Annotated[OAuth2PasswordRequestForm, Depends()],
-    db: Annotated[Session, Depends(get_db)]
+    form_data: OAuth2PasswordRequestForm = Depends(),
+    db: Session = Depends(get_db)
 ):
     user = db.query(User).filter(User.email == form_data.username).first()
     if not user or not verify_password(form_data.password, user.hashed_password):

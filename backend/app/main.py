@@ -49,26 +49,6 @@ def get_current_user(
         raise HTTPException(status.HTTP_401_UNAUTHORIZED, detail="Invalid or expired token")
     return creds
 
-
-@app.post("/predict", response_model=PredictionOut)
-async def predict(file: UploadFile = File(...)):
-    """
-    Accepts form-upload of an iamge file, returns JSON { "label": "<pred>" }.
-    """
-    img_bytes = await file.read()
-    pred_label, pred_prob = predict_image(img_bytes, model)
-    return PredictionOut(label=pred_label, confidence=pred_prob)
-
-@app.post("/logs", response_model=LogOut)
-def add_log(
-    category: Annotated[str | None, Depends()] = None,
-    current_user: TokenData = Depends(get_current_user),
-    db: Session = Depends(get_db),
-):
-    log = RecyclingLog(user_id=current_user.user_id, category=category)
-    db.add(log); db.commit(); db.refresh(log)
-    return log
-
 @app.get("/leaderboard")
 def leaderboard(
     db: Annotated[Session, Depends(get_db)]
@@ -99,3 +79,13 @@ def streak(
             break
         streak += 1
     return {"streak": streak}
+
+@app.post("/logs", response_model=LogOut)
+def add_log(
+    category: Annotated[str | None, Depends()] = None,
+    current_user: TokenData = Depends(get_current_user),
+    db: Session = Depends(get_db),
+):
+    log = RecyclingLog(user_id=current_user.user_id, category=category)
+    db.add(log); db.commit(); db.refresh(log)
+    return log
