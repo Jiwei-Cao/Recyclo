@@ -1,8 +1,8 @@
-import os
-from fastapi import FastAPI, File, UploadFile
+from fastapi import FastAPI, File, UploadFile, HTTPException, Depends
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 from app.model.model import load_model, predict_image, __version__ as model_version
+from typing import List, Annotated
 
 app = FastAPI()
 model = load_model()

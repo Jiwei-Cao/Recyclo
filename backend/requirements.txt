@@ -5,3 +5,5 @@ torchvision
 pillow
 pyjwt
 bcrypt 
+psycopg2-binary
+sqlalchemy
