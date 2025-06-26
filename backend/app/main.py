@@ -1,6 +1,7 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
+from app import health
 from app.database import engine, Base
 from app.auth.routes import router as auth_router
 from app.predict.routes import router as predict_router
@@ -24,6 +25,7 @@ app.add_middleware(
     allow_headers=["*"]
 )
 
+app.include_router(health.router)
 app.include_router(auth_router, prefix="/auth", tags=["auth"])
 app.include_router(predict_router, prefix="/predict", tags=["predict"])
 app.include_router(logs_router, prefix="/logs", tags=["logs"])
