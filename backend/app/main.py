@@ -24,6 +24,6 @@ app.add_middleware(
     allow_headers=["*"]
 )
 
-app.include_router(auth_router, tags=["auth"])
-app.include_router(predict_router, tags=["predict"])
-app.include_router(logs_router, tags=["logs"])
+app.include_router(auth_router, prefix="/auth", tags=["auth"])
+app.include_router(predict_router, prefix="/predict", tags=["predict"])
+app.include_router(logs_router, prefix="/logs", tags=["logs"])
