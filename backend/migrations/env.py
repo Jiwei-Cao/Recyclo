@@ -8,6 +8,7 @@ from alembic import context
 import os 
 from dotenv import load_dotenv
 
+config = context.config
 load_dotenv(os.path.join(os.path.dirname(__file__), '..', '.env'))
 config.set_main_option("sqlalchemy.url", os.getenv("DATABASE_URL"))
 

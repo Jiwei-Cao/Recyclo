@@ -17,9 +17,9 @@ frontend/.local
 
 # --- Python (Backend) ---
 backend/venv/
-backend/__pycache__/
 backend/.env
 backend/*.sqlite3
+__pycache__/
 
 # --- General .env ---
 *.env
