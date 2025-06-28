@@ -1,6 +1,6 @@
 from fastapi import APIRouter, Depends
-from app.auth import get_current_user
-from app.schemas import TokenData
+from app.auth.dependencies import get_current_user
+from app.auth.token import TokenData
 
 router = APIRouter()
 

@@ -13,7 +13,7 @@ app = FastAPI()
 Base.metadata.create_all(bind=engine)
 
 origins = [
-    "http://localhost:3000",
+    "http://localhost:5173",
     "https://recyclo-ai.vercel.app",
     "https://recyclo-git-main-jiweis-projects.vercel.app",
     "https://recyclo-jiweis-projects.vercel.app"
@@ -30,5 +30,5 @@ app.add_middleware(
 app.include_router(health.router)
 app.include_router(users_router, prefix="/users", tags=["users"])
 app.include_router(auth_router, prefix="/auth", tags=["auth"])
-app.include_router(predict_router, prefix="/predict", tags=["predict"])
-app.include_router(logs_router, prefix="/logs", tags=["logs"])
+app.include_router(predict_router, tags=["predict"])
+app.include_router(logs_router, tags=["logs"])
