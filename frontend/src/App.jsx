@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Login from './login';
-import Protected from './protected';
-import ProtectedApp from './components/ProtectedApp';
+import Login from './components/login';
+import Protected from './components/protected';
+import MainApp from './MainApp';
 
 function App() {
   const [prediction, setPrediction] = useState(null);

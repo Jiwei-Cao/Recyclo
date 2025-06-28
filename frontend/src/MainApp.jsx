@@ -1,9 +1,10 @@
 import React, { useState } from 'react'
-import UploadImage from './UploadImage'
-import PredictionResult from './PredictionResult'
-import ThemeToggle from './ThemeToggle'
+import UploadImage from './components/UploadImage'
+import PredictionResult from './components/PredictionResult'
+import ThemeToggle from './components/ThemeToggle'
+import Header from "./components/Header"
 
-function App() {
+function MainApp() {
   const [prediction, setPrediction] = useState(null)
   const [darkMode, setDarkMode] = useState(false);
 
@@ -25,6 +26,7 @@ function App() {
 
   return (
     <div className={containerClasses}>
+      <Header />
       <ThemeToggle darkMode={darkMode} setDarkMode={setDarkMode} />
 
       <h1 className={headingClass}>
@@ -37,4 +39,4 @@ function App() {
   )
 }
 
-export default ProtectedApp;
+export default MainApp;
