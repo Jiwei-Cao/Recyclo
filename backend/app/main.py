@@ -12,6 +12,7 @@ app = FastAPI()
 Base.metadata.create_all(bind=engine)
 
 origins = [
+    "http://localhost:3000",
     "https://recyclo-ai.vercel.app",
     "https://recyclo-git-main-jiweis-projects.vercel.app",
     "https://recyclo-jiweis-projects.vercel.app"
