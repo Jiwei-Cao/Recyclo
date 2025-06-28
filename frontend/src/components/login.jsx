@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 function Login() {
+    console.log('Login component rendered');
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
@@ -28,7 +29,7 @@ function Login() {
         formDetails.append('password', password);
         try {
             const response = await fetch(
-                `${import.meta.env.VITE_API_URL}/auth/login`,
+                `${import.meta.env.VITE_API_BASE_URL}/login`,
                 {
                 method: 'POST',
                 headers: {
@@ -45,46 +46,56 @@ function Login() {
 
             const data = await response.json();
             localStorage.setItem('token', data.access_token);
-            navigate('/protected');
+            navigate('/stats');
         } catch (error) {
         setLoading(false);
         setError('An error occurred: ' + error.message + ' Please try again later.');
         }
     }
-
     return (
-        <form onSubmit={handleSubmit}>
-            {error && <p style={{ color: 'red' }}>{error}</p>}
+    <div className="min-h-screen flex items-center justify-center bg-gray-100 p-4">
+        <form onSubmit={handleSubmit} className="bg-white p-6 rounded shadow-md w-full max-w-md">
+        <h2 className="text-2xl font-bold mb-4">🔑 Login</h2>
 
-            <label>
-                Username:
-                <input
-                    type="text"
-                    value={username}
-                    onChange={(e) => setUsername(e.target.value)}
-                    disabled={loading}
-                    required
-                />
-            </label>
+        {error && <p className="text-red-500 mb-2">{error}</p>}
 
-            <label>
-                Password:
-                <input
-                    type="password"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                    disabled={loading}
-                    required
-                />
-            </label>
+        <label className="block mb-2">
+            Username:
+            <input
+            type="text"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+            disabled={loading}
+            required
+            className="w-full border px-3 py-2 mt-1"
+            />
+        </label>
 
-            <button type="submit" disabled={loading}>
-                {loading ? 'Logging in...' : 'Login'}
-            </button>
-            <p>
-                Don't have an account? <a href="/register">Register here</a>
-            </p>
+        <label className="block mb-4">
+            Password:
+            <input
+            type="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            disabled={loading}
+            required
+            className="w-full border px-3 py-2 mt-1"
+            />
+        </label>
+
+        <button
+            type="submit"
+            disabled={loading}
+            className="bg-green-600 text-white px-4 py-2 w-full rounded hover:bg-green-700"
+        >
+            {loading ? 'Logging in…' : 'Login'}
+        </button>
+
+        <p className="mt-4 text-sm text-center">
+            Don't have an account? <a href="/register" className="text-blue-600">Register here</a>
+        </p>
         </form>
+    </div>
     );
 }
 

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Login from './components/login';
 import Protected from './components/protected';
@@ -11,17 +11,28 @@ function App() {
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<Login />} />
+        {/* Main Recyclo page */}
+        <Route 
+            path="/"
+            element={
+                <MainApp 
+                prediction={prediction} 
+                setPrediction={setPrediction} 
+                darkMode={darkMode} 
+                setDarkMode={setDarkMode} 
+                />
+            }   
+        />
+
+        {/* Login page */}
+        <Route path="/login" element={<Login />} />
+
+         {/* Protected stats page */}
         <Route
-          path="/protected"
+          path="/stats"
           element={
             <Protected>
-              <ProtectedApp 
-                prediction={prediction}
-                setPrediction={setPrediction}
-                darkMode={darkMode}
-                setDarkMode={setDarkMode}
-              />
+              <Stats />
             </Protected>
           }
         />
