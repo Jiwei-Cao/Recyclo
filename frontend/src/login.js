@@ -45,7 +45,7 @@ function Login() {
 
             const data = await response.json();
             localStorage.setItem('token', data.access_token);
-            navigate('/dashboard');
+            navigate('/protected');
         } catch (error) {
         setLoading(false);
         setError('An error occurred: ' + error.message + ' Please try again later.');
