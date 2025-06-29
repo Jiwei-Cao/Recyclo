@@ -51,3 +51,13 @@ def streak(
             break
         streak += 1
     return {"streak": streak}
+
+@router.get("/logs", response_model=list[LogOut])
+def get_user_logs(
+    current_user: TokenData = Depends(get_current_user),
+    db: Session = Depends(get_db),
+):
+    logs = db.query(RecyclingLog).filter(
+        RecyclingLog.user_id == current_user.user_id
+    ).order_by(RecyclingLog.timestamp.desc()).all()
+    return logs
