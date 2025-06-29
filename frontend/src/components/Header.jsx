@@ -18,6 +18,13 @@ export default function Header() {
         >
          {token ? "📊 My Stats" : "🔑 Login"}
       </button>
+
+      <button
+        className="text-lg hover:text-green-600 transition"
+        onClick={() => navigate("/leaderboard")}
+      >
+        🏆 Leaderboard
+      </button>
     </header>
   );
 }

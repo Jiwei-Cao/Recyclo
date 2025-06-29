@@ -3,6 +3,8 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Login from './components/Login';
 import Protected from './components/Protected';
 import MainApp from './MainApp';
+import Stats from './components/Stats';
+import Leaderboard from './components/Leaderboard';
 
 function App() {
   const [prediction, setPrediction] = useState(null);
@@ -36,6 +38,9 @@ function App() {
             </Protected>
           }
         />
+
+        {/* Leaderboard page */}
+        <Route path="/leaderboard" element={<Leaderboard />} />
       </Routes>
     </Router>
   );
