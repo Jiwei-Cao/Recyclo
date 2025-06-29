@@ -1,6 +1,7 @@
 from pydantic import BaseModel
+from typing import Optional
 
 class LogOut(BaseModel):
     id: int
     timestamp: str
-    category: str | None
+    category: Optional[str]

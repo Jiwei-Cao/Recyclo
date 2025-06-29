@@ -3,6 +3,7 @@ from fastapi import APIRouter, Depends, HTTPException, status
 from fastapi.security import OAuth2PasswordBearer
 from sqlalchemy import func
 from sqlalchemy.orm import Session
+from typing import Optional
 
 from app.database import get_db
 from app.auth.token import TokenData
@@ -14,7 +15,7 @@ router = APIRouter()
 
 @router.post("/logs", response_model=LogOut)
 def add_log(
-    category: str | None = None,
+    category: Optional[str],
     current_user: TokenData = Depends(get_current_user),
     db: Session = Depends(get_db),
 ):
