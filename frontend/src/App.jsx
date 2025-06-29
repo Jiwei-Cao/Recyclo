@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Login from './components/login';
-import Protected from './components/protected';
+import Login from './components/Login';
+import Protected from './components/Rrotected';
 import MainApp from './MainApp';
 
 function App() {
