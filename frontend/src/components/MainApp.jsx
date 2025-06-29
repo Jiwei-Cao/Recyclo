@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
-import UploadImage from './components/UploadImage'
-import PredictionResult from './components/PredictionResult'
-import ThemeToggle from './components/ThemeToggle'
-import Header from "./components/Header"
+import UploadImage from './UploadImage'
+import PredictionResult from './PredictionResult'
+import ThemeToggle from './ThemeToggle'
+import Header from "./Header"
 
 function MainApp() {
   const [prediction, setPrediction] = useState(null)
