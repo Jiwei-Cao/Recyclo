@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
+import Header from './Header';
 
-function Stats() {
+function Stats({ darkMode, setDarkMode}) {
     const [dailyStreak, setDailyStreak] = useState(0);
     const [weeklyTotal, setWeeklyTotal] = useState(0);
     const [monthlyTotal, setMonthlyTotal] = useState(0);
@@ -61,6 +62,7 @@ function Stats() {
 
     return (
     <div className="p-6 max-w-xl mx-auto">
+      <Header darkMode={darkMode} setDarkMode={setDarkMode} />
       <h2 className="text-xl font-bold mb-4">📊 Your Recycling Stats</h2>
 
       <div className="mb-4">

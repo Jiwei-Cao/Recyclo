@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 import UploadImage from './UploadImage'
 import PredictionResult from './PredictionResult'
-import ThemeToggle from './ThemeToggle'
 import Header from "./Header"
 
 function MainApp() {
@@ -26,8 +25,7 @@ function MainApp() {
 
   return (
     <div className={containerClasses}>
-      <Header />
-      <ThemeToggle darkMode={darkMode} setDarkMode={setDarkMode} />
+      <Header darkMode={darkMode} setDarkMode={setDarkMode}/>
 
       <h1 className={headingClass}>
         ♻️ Recyclo Waste Classifier

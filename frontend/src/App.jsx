@@ -28,23 +28,23 @@ function App() {
         />
 
         {/* Login page */}
-        <Route path="/login" element={<Login />} />
+        <Route path="/login" element={<Login darkMode={darkMode} setDarkMode={setDarkMode}/>} />
 
          {/* Protected stats page */}
         <Route
           path="/stats"
           element={
             <Protected>
-              <Stats />
+              <Stats darkMode={darkMode} setDarkMode={setDarkMode}/>
             </Protected>
           }
         />
 
         {/* Leaderboard page */}
-        <Route path="/leaderboard" element={<Leaderboard />} />
+        <Route path="/leaderboard" element={<Leaderboard darkMode={darkMode} setDarkMode={setDarkMode}/>} />
 
         {/* Register page */}
-        <Route path="/register" element={<Register />} />
+        <Route path="/register" element={<Register darkMode={darkMode} setDarkMode={setDarkMode}/>} />
       </Routes>
     </Router>
   );

@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import Header from './Header';
 
-function Register() {
+function Register({ darkMode, setDarkMode }) {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
@@ -50,6 +51,7 @@ function Register() {
 
     return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100 p-4">
+      <Header darkMode={darkMode} setDarkMode={setDarkMode} />
       <form onSubmit={handleSubmit} className="bg-white p-6 rounded shadow-md w-full max-w-md">
         <h2 className="text-2xl font-bold mb-4">📝 Register</h2>
 

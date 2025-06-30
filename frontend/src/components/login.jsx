@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import Header from './Header';
 
-function Login() {
+function Login({ darkMode, setDarkMode}) {
     console.log('Login component rendered');
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
@@ -52,6 +53,7 @@ function Login() {
     }
     return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100 p-4">
+        <Header darkMode={darkMode} setDarkMode={setDarkMode} />
         <form onSubmit={handleSubmit} className="bg-white p-6 rounded shadow-md w-full max-w-md">
         <h2 className="text-2xl font-bold mb-4">🔑 Login</h2>
 
