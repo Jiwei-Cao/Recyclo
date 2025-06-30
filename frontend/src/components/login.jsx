@@ -3,7 +3,6 @@ import { useNavigate } from 'react-router-dom';
 import Header from './Header';
 
 function Login({ darkMode, setDarkMode}) {
-    console.log('Login component rendered');
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
