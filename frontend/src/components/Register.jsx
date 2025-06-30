@@ -27,6 +27,7 @@ function Register({ darkMode, setDarkMode }) {
         const formDetails = new URLSearchParams();
         formDetails.append('username', username);
         formDetails.append('password', password);
+
         try {
             const response = await fetch(
                 `${import.meta.env.VITE_API_BASE_URL}/register`,
@@ -47,12 +48,38 @@ function Register({ darkMode, setDarkMode }) {
             setLoading(false);
             setError('An error occurred: ' + error.message + ' Please try again later.');
         }
-    }
+    };
+
+    const outerClass = `
+      min-h-screen flex flex-col items-center justify-center p-4 
+      ${darkMode ? 'bg-gray-900 text-white' : 'bg-white text-gray-900'} 
+      transition-colors duration-300
+    `;
+
+    const formClass = `
+      ${darkMode ? 'bg-gray-800 text-white' : 'bg-white text-gray-900'} 
+      p-6 rounded shadow-md w-full max-w-md border
+      ${darkMode ? 'border-gray-700' : 'border-gray-200'}
+      transition-colors duration-300
+    `;
+
+    const inputClass = `
+      w-full border px-3 py-2 mt-1 bg-transparent 
+      ${darkMode ? 'border-gray-600' : 'border-gray-300'} 
+      rounded transition-colors duration-300
+    `;
+
+    const buttonClass = `
+      bg-green-600 text-white px-4 py-2 w-full rounded 
+      hover:bg-green-700 disabled:opacity-50
+      transition-colors duration-300
+    `;
 
     return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100 p-4">
+    <div className={outerClass}>
       <Header darkMode={darkMode} setDarkMode={setDarkMode} />
-      <form onSubmit={handleSubmit} className="bg-white p-6 rounded shadow-md w-full max-w-md">
+
+      <form onSubmit={handleSubmit} className={formClass}>
         <h2 className="text-2xl font-bold mb-4">📝 Register</h2>
 
         {error && <p className="text-red-500 mb-2">{error}</p>}
@@ -65,7 +92,7 @@ function Register({ darkMode, setDarkMode }) {
             onChange={(e) => setUsername(e.target.value)}
             disabled={loading}
             required
-            className="w-full border px-3 py-2 mt-1"
+            className={inputClass}
           />
         </label>
 
@@ -77,14 +104,14 @@ function Register({ darkMode, setDarkMode }) {
             onChange={(e) => setPassword(e.target.value)}
             disabled={loading}
             required
-            className="w-full border px-3 py-2 mt-1"
+            className={inputClass}
           />
         </label>
 
         <button
           type="submit"
           disabled={loading}
-          className="bg-green-600 text-white px-4 py-2 w-full rounded hover:bg-green-700"
+          className={buttonClass}
         >
           {loading ? 'Registering…' : 'Register'}
         </button>
