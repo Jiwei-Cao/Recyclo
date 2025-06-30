@@ -3,9 +3,8 @@ import UploadImage from './UploadImage'
 import PredictionResult from './PredictionResult'
 import Header from "./Header"
 
-function MainApp() {
+function MainApp({ darkMode, setDarkMode }) {
   const [prediction, setPrediction] = useState(null)
-  const [darkMode, setDarkMode] = useState(false);
 
   const baseContainer = `
     flex flex-col items-center justify-center 

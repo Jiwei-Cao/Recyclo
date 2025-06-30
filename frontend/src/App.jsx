@@ -7,9 +7,23 @@ import Stats from './components/Stats';
 import Leaderboard from './components/Leaderboard';
 import Register from './components/Register';
 
+const getInitialDarkMode = () => {
+  const stored = localStorage.getItem('darkMode');
+  return stored === 'true';
+}
+
 function App() {
   const [prediction, setPrediction] = useState(null);
-  const [darkMode, setDarkMode] = useState(false);
+  const [darkMode, _setDarkMode] = useState(getInitialDarkMode);
+
+  const setDarkMode = (valueOrUpdater) => {
+    const nextValue = typeof valueOrUpdater === 'function'
+      ? valueOrUpdater(darkMode)
+      : valueOrUpdater;
+
+    _setDarkMode(nextValue);
+    localStorage.setItem('darkMode', nextValue);
+  };
 
   return (
     <Router>
