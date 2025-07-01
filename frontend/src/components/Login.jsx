@@ -30,7 +30,7 @@ function Login({ darkMode, setDarkMode}) {
         formDetails.append('password', password);
 
         try {
-            const response = api.post('login', formDetails)
+            const response = await api.post('login', formDetails)
             localStorage.setItem('token', response.data.access_token);
             navigate('/stats');
         } catch (error) {

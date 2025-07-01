@@ -30,13 +30,7 @@ function Register({ darkMode, setDarkMode }) {
         formDetails.append('password', password);
 
         try {
-            await api.post('/register', form)
-
-            if (!response.ok) {
-                setLoading(false);
-                throw new Error('Registration failed. Please try again.');
-            }
-
+            await api.post('/register', formDetails)
             navigate('/login');
         } catch (error) {
             setError('An error occurred: ' + error.message + ' Please try again later.');
