@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import Header from './Header';
+import api from '../api';
 
 function Stats({ darkMode, setDarkMode}) {
     const [dailyStreak, setDailyStreak] = useState(0);
@@ -18,14 +19,13 @@ function Stats({ darkMode, setDarkMode}) {
             'Authorization': `Bearer ${token}`,
         };
 
-        fetch(`${import.meta.env.VITE_API_BASE_URL}/streak`, { headers })
-            .then(res => res.json())
-            .then(data => setDailyStreak(data.streak))
+        api.get('/streak', { headers })
+            .then(res => setDailyStreak(res.data.streak))
             .catch(err => console.error('Error fetching daily streak:', err));
 
-        fetch(`${import.meta.env.VITE_API_BASE_URL}/logs`, { headers })
-        .then(res => res.json())
-        .then(data => {
+        api.get('/logs', { headers })
+          .then(res => {
+            const data = res.data
             setRecycleLog(data);
 
             const now = new Date();

@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import api from '../api.js'
 
 function ProtectedPage() {
   const navigate = useNavigate();
@@ -12,25 +13,16 @@ function ProtectedPage() {
       }
 
       try {
-        const response = await fetch(
-          `${import.meta.env.VITE_API_URL}/protected`,
+        const response = await api.get('/protected',
           {
-            method: 'GET',
             headers: {
               'Authorization': `Bearer ${token}`,
             },
           }
         );
-
-        if (!response.ok) {
-          return navigate('/login');
-        }
-
-        const userData = await response.json();
-        console.log('Logged in as:', userData);
-
       } catch (err) {
-        navigate('/login');
+        localStorage.removeItem('token')
+        navigate('/');
       }
     };
 

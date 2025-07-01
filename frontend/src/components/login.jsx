@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Header from './Header';
+import api from '../api';
 
 function Login({ darkMode, setDarkMode}) {
     const [username, setUsername] = useState('');
@@ -23,28 +24,14 @@ function Login({ darkMode, setDarkMode}) {
         e.preventDefault();
         if (!validateForm()) return;
         setLoading(true);
-
+    
         const formDetails = new URLSearchParams();
         formDetails.append('username', username);
         formDetails.append('password', password);
-    
+
         try {
-            const response = await fetch(
-                `${import.meta.env.VITE_API_BASE_URL}/login`,
-                {
-                method: 'POST',
-                headers: {'Content-Type': 'application/x-www-form-urlencoded'},
-                body: formDetails.toString(),
-                }
-            );
-
-            if (!response.ok) {
-                setLoading(false);
-                throw new Error('Login failed. Please check your credentials.');
-            }
-
-            const data = await response.json();
-            localStorage.setItem('token', data.access_token);
+            const response = api.post('login', form)
+            localStorage.setItem('token', response.data.access_token);
             navigate('/stats');
         } catch (error) {
             setLoading(false);

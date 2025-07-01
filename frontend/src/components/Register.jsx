@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Header from './Header';
+import api from '../api';
 
 function Register({ darkMode, setDarkMode }) {
     const [username, setUsername] = useState('');
@@ -29,14 +30,7 @@ function Register({ darkMode, setDarkMode }) {
         formDetails.append('password', password);
 
         try {
-            const response = await fetch(
-                `${import.meta.env.VITE_API_BASE_URL}/register`,
-                {
-                    method: `POST`,
-                    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-                    body: formDetails.toString(),
-                }
-            );
+            await api.post('/register', form)
 
             if (!response.ok) {
                 setLoading(false);
@@ -45,8 +39,9 @@ function Register({ darkMode, setDarkMode }) {
 
             navigate('/login');
         } catch (error) {
-            setLoading(false);
             setError('An error occurred: ' + error.message + ' Please try again later.');
+        } finally {
+          setLoading(false);
         }
     };
 

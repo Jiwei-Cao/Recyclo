@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import Header from './Header';
+import api from '../api';
 
 function Leaderboard({ darkMode, setDarkMode }) {
     const [leaders, setleaders] = useState([]);
 
     useEffect(() => {
-        fetch(`${import.meta.env.VITE_API_BASE_URL}/leaderboard`)
-            .then(res => res.json())
-            .then(data => setleaders(data))
+        api.get('/leaderboard')
+            .then(res => setleaders(res.data))
             .catch(err => console.error('Error fetching leaderboard:', err));
     }, []);
 
