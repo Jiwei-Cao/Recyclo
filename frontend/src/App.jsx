@@ -1,9 +1,9 @@
 import { useState } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Login from './components/Login';
+import Login from './components/Lwogin';
 import Protected from './components/Protected';
 import MainApp from './components/MainApp';
-import Stats from './components/Stats';
+import Stats from './components/stsat';
 import Leaderboard from './components/Leaderboard';
 import Register from './components/Register';
 
