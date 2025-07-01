@@ -12,16 +12,9 @@ app = FastAPI()
 
 Base.metadata.create_all(bind=engine)
 
-origins = [
-    "https://recyclo-ai.vercel.app",
-    "https://recyclo-git-main-jiweis-projects.vercel.app",
-    "https://recyclo-ngxncqyus-jiweis-projects.vercel.app",
-    "https://recyclo-jiweis-projects.vercel.app"
-]
-
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=origins,
+    allow_origin_regex=r"https://.*\.vercel\.app",
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"]
