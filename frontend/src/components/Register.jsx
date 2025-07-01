@@ -34,12 +34,12 @@ function Register({ darkMode, setDarkMode }) {
         setLoading(true);
 
         try {
-            await api.post('/register', {
+            await api.post('/auth/register', {
               username: username,
               email: email,
               password: password
             })
-            navigate('/login');
+            navigate('/auth/login');
         } catch (error) {
             setError('An error occurred: ' + error.message + ' Please try again later.');
         } finally {
@@ -138,7 +138,7 @@ function Register({ darkMode, setDarkMode }) {
         </button>
 
         <p className="mt-4 text-sm text-center">
-          Already have an account? <a href="/login" className="text-blue-600">Login here</a>
+          Already have an account? <a href="/auth/login" className="text-blue-600">Login here</a>
         </p>
       </form>
     </div>

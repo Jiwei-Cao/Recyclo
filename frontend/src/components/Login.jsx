@@ -26,7 +26,7 @@ function Login({ darkMode, setDarkMode}) {
         setLoading(true);
 
         try {
-            const response = await api.post('login', {
+            const response = await api.post('/auth/login', {
                 username: username, 
                 password: password
             })
@@ -105,7 +105,7 @@ function Login({ darkMode, setDarkMode}) {
         </button>
 
         <p className="mt-4 text-sm text-center">
-            Don't have an account? <a href="/register" className="text-blue-600">Register here</a>
+            Don't have an account? <a href="/auth/register" className="text-blue-600">Register here</a>
         </p>
         </form>
     </div>
