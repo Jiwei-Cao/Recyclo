@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Header from "./Header"
-import api from './api';
+import api from '../api';
 
 function Login({ darkMode, setDarkMode}) {
     const [username, setUsername] = useState('');
