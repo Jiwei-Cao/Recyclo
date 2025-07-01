@@ -15,8 +15,8 @@ Base.metadata.create_all(bind=engine)
 origins = [
     "https://recyclo-ai.vercel.app",
     "https://recyclo-git-main-jiweis-projects.vercel.app",
-    "https://recyclo-3hr5t2wns-jiweis-projects.vercel.app",
-    "https://recyclo-jiweis-projects.vercel.app/"
+    "https://recyclo-ngxncqyus-jiweis-projects.vercel.app",
+    "https://recyclo-jiweis-projects.vercel.app"
 ]
 
 app.add_middleware(
