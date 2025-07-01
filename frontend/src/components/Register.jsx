@@ -4,18 +4,26 @@ import Header from './Header';
 import api from '../api';
 
 function Register({ darkMode, setDarkMode }) {
+    const [email, setEmail] = useState('');
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
+    const [confirmPassword, setConfirmPassword] = useState('');
     const [error, setError] = useState('');
     const [loading, setLoading] = useState(false);
 
     const navigate = useNavigate();
 
     const validateForm = () => {
-        if (!username || !password) {
-            setError('Username and password are required.');
+        if (!email || !username || !password || !confirmPassword) {
+            setError('All fields are required.');
             return false;
         }
+
+        if (password != confirmPassword) {
+          setError('Passwords do not match.')
+          return false;
+        }
+
         setError('');
         return true;
     };
@@ -28,6 +36,7 @@ function Register({ darkMode, setDarkMode }) {
         try {
             await api.post('/register', {
               username: username,
+              email: email,
               password: password
             })
             navigate('/login');
@@ -73,6 +82,18 @@ function Register({ darkMode, setDarkMode }) {
         {error && <p className="text-red-500 mb-2">{error}</p>}
 
         <label className="block mb-2">
+          Email:
+          <input
+            type="text"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            disabled={loading}
+            required
+            className={inputClass}
+          />
+        </label>
+
+        <label className="block mb-2">
           Username:
           <input
             type="text"
@@ -90,6 +111,18 @@ function Register({ darkMode, setDarkMode }) {
             type="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
+            disabled={loading}
+            required
+            className={inputClass}
+          />
+        </label>
+
+        <label className="block mb-4">
+          Confirm Password:
+          <input
+            type="password"
+            value={confirmPassword}
+            onChange={(e) => setConfirmPassword(e.target.value)}
             disabled={loading}
             required
             className={inputClass}
