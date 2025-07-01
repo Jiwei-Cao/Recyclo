@@ -42,7 +42,7 @@ function App() {
         />
 
         {/* Login page */}
-        <Route path="/login" element={<Login darkMode={darkMode} setDarkMode={setDarkMode}/>} />
+        <Route path="/auth/login" element={<Login darkMode={darkMode} setDarkMode={setDarkMode}/>} />
 
          {/* Protected stats page */}
         <Route
@@ -58,7 +58,7 @@ function App() {
         <Route path="/leaderboard" element={<Leaderboard darkMode={darkMode} setDarkMode={setDarkMode}/>} />
 
         {/* Register page */}
-        <Route path="/register" element={<Register darkMode={darkMode} setDarkMode={setDarkMode}/>} />
+        <Route path="/auth/register" element={<Register darkMode={darkMode} setDarkMode={setDarkMode}/>} />
       </Routes>
     </Router>
   );
