@@ -13,7 +13,7 @@ app = FastAPI()
 Base.metadata.create_all(bind=engine)
 
 origins = [
-    "https://recyclo-ai.vercel.app"
+    "*"
 ]
 
 app.add_middleware(
