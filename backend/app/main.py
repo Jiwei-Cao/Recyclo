@@ -13,9 +13,9 @@ app = FastAPI()
 Base.metadata.create_all(bind=engine)
 
 origins = [
-    "https://recyclo-ai.vercel.app",
+    "recyclo-jiweis-projects.vercel.app",
     "https://recyclo-git-main-jiweis-projects.vercel.app",
-    "https://recyclo-jiweis-projects.vercel.app"
+    "https://recyclo-hf777t1gg-jiweis-projects.vercel.app"
 ]
 
 app.add_middleware(
