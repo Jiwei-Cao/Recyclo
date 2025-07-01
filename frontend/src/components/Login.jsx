@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import Header from './Header';
-import api from '../api';
+import Header from './components/Header';
+import api from './api';
 
 function Login({ darkMode, setDarkMode}) {
     const [username, setUsername] = useState('');
@@ -30,7 +30,7 @@ function Login({ darkMode, setDarkMode}) {
         formDetails.append('password', password);
 
         try {
-            const response = api.post('login', form)
+            const response = api.post('login', formDetails)
             localStorage.setItem('token', response.data.access_token);
             navigate('/stats');
         } catch (error) {
