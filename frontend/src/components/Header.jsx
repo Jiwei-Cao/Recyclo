@@ -24,7 +24,7 @@ export default function Header( {darkMode, setDarkMode}) {
         </button>
         <button
           className={buttonClass}
-          onClick={() => navigate(token ? "/stats" : "/login")}
+          onClick={() => navigate(token ? "/stats" : "/auth/login")}
         >
           {token ? "📊 My Stats" : "🔑 Login"}
         </button>
