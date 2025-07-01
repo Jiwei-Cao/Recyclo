@@ -25,12 +25,11 @@ function Register({ darkMode, setDarkMode }) {
         if (!validateForm()) return;
         setLoading(true);
 
-        const formDetails = new URLSearchParams();
-        formDetails.append('username', username);
-        formDetails.append('password', password);
-
         try {
-            await api.post('/register', formDetails)
+            await api.post('/register', {
+              username: username,
+              password: password
+            })
             navigate('/login');
         } catch (error) {
             setError('An error occurred: ' + error.message + ' Please try again later.');

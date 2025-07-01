@@ -24,13 +24,12 @@ function Login({ darkMode, setDarkMode}) {
         e.preventDefault();
         if (!validateForm()) return;
         setLoading(true);
-    
-        const formDetails = new URLSearchParams();
-        formDetails.append('username', username);
-        formDetails.append('password', password);
 
         try {
-            const response = await api.post('login', formDetails)
+            const response = await api.post('login', {
+                username: username, 
+                password: password
+            })
             localStorage.setItem('token', response.data.access_token);
             navigate('/stats');
         } catch (error) {
