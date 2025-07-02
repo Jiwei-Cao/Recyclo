@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify'
+
 import Header from './Header';
 import api from '../api';
 
@@ -39,9 +41,11 @@ function Register({ darkMode, setDarkMode }) {
               email: email,
               password: password
             })
+            toast.success('Registered! Please log in.')
             navigate('/auth/login');
-        } catch (error) {
-            setError('An error occurred: ' + error.message + ' Please try again later.');
+        } catch (err) {
+          const detail = err.response?.data?.detail;
+            setError(detail || err.message);
         } finally {
           setLoading(false);
         }
@@ -84,7 +88,7 @@ function Register({ darkMode, setDarkMode }) {
         <label className="block mb-2">
           Email:
           <input
-            type="text"
+            type="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             disabled={loading}
@@ -138,7 +142,8 @@ function Register({ darkMode, setDarkMode }) {
         </button>
 
         <p className="mt-4 text-sm text-center">
-          Already have an account? <a href="/auth/login" className="text-blue-600">Login here</a>
+          Already have an account? 
+          <a href="/auth/login" className="text-blue-600">Login here</a>
         </p>
       </form>
     </div>

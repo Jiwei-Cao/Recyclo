@@ -1,5 +1,7 @@
 import { useState } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { ToastContainer } from 'react-toastify';
+
 import Login from './components/Login';
 import Protected from './components/Protected';
 import MainApp from './components/MainApp';
@@ -27,6 +29,7 @@ function App() {
 
   return (
     <Router>
+      <ToastContainer />
       <Routes>
         {/* Main Recyclo page */}
         <Route 
