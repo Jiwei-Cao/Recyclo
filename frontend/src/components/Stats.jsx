@@ -9,51 +9,49 @@ function Stats({ darkMode, setDarkMode}) {
     const [weeklyTotal, setWeeklyTotal] = useState(0);
     const [monthlyTotal, setMonthlyTotal] = useState(0);
     const [recycleLog, setRecycleLog] = useState([]);
-
     const navigate = useNavigate();
 
     useEffect(() => {
+      const loadStats = async () => {
         const token = localStorage.getItem('token');
-        if (!token) {
-            navigate('/auth/login');
-            return;
+        const headers = { Authorization: `Bearer ${token}` };
+
+        try {
+          const [streakRes, logsRes] = await Promise.all([
+            api.get('/streak', { headers }),
+            api.get('/logs',   { headers }),
+          ]);
+
+          setDailyStreak(streakRes.data.streak);
+          const data = logsRes.data;
+          setRecycleLog(data);
+
+          const now = new Date();
+          const thisMonth = now.getMonth();
+          const thisYear = now.getFullYear();
+          const startOfWeek = new Date(now);
+          startOfWeek.setDate(now.getDate() - now.getDay());
+
+          const monthly = data.filter(log => {
+            const d = new Date(log.timestamp);
+            return d.getMonth() === thisMonth && d.getFullYear() === thisYear;
+          });
+          const weekly = data.filter(log => new Date(log.timestamp) >= startOfWeek);
+
+          setMonthlyTotal(monthly.length);
+          setWeeklyTotal(weekly.length);
+        } catch (err) {
+          if (err.response?.status === 401) {
+            localStorage.removeItem('token');
+            navigate('/auth/login', { replace: true });
+          } else {
+            console.error('Error loading stats:', err);
+          }
         }
+      };
 
-        const headers = {
-            'Authorization': `Bearer ${token}`,
-        };
-
-        api.get('/streak', { headers })
-            .then(res => setDailyStreak(res.data.streak))
-            .catch(err => console.error('Error fetching daily streak:', err));
-
-        api.get('/logs', { headers })
-          .then(res => {
-            const data = res.data
-            setRecycleLog(data);
-
-            const now = new Date();
-            const thisMonth = now.getMonth();
-            const thisYear = now.getFullYear();
-
-            const startOfWeek = new Date(now);
-            startOfWeek.setDate(now.getDate() - now.getDay());
-
-            const monthly = data.filter(log => {
-                const date = new Date(log.timestamp);
-                return date.getMonth() === thisMonth && date.getFullYear() === thisYear;
-            })
-
-            const weekly = data.filter(log => {
-                const date = new Date(log.timestamp);
-                return date >= startOfWeek;
-            })
-
-            setMonthlyTotal(monthly.length);
-            setWeeklyTotal(weekly.length);
-        })
-        .catch(err => console.error('Error fetching recycle logs:', err));
-    }, []);
+      loadStats();
+    }, [navigate]);
 
     const getImpactMessage = (category) => {
         switch (category) {

@@ -1,6 +1,5 @@
 from datetime import date, timedelta
-from fastapi import APIRouter, Depends, HTTPException, status
-from fastapi.security import OAuth2PasswordBearer
+from fastapi import APIRouter, Depends
 from sqlalchemy import func
 from sqlalchemy.orm import Session
 from typing import Optional
@@ -8,20 +7,30 @@ from typing import Optional
 from app.database import get_db
 from app.auth.token import TokenData
 from app.models import RecyclingLog, User
-from app.schemas.log import LogOut
+from app.schemas.log import LogIn, LogOut
 from app.auth.dependencies import get_current_user
 
 router = APIRouter()
 
-@router.post("/logs", response_model=LogOut)
+@router.post("/", response_model=LogOut)
 def add_log(
-    category: Optional[str],
+    data: LogIn,
     current_user: TokenData = Depends(get_current_user),
     db: Session = Depends(get_db),
 ):
-    log = RecyclingLog(user_id=current_user.user_id, category=category)
+    log = RecyclingLog(user_id=current_user.user_id, category=data.category)
     db.add(log); db.commit(); db.refresh(log)
     return log
+
+@router.get("/", response_model=list[LogOut])
+def get_user_logs(
+    current_user: TokenData = Depends(get_current_user),
+    db: Session = Depends(get_db),
+):
+    logs = db.query(RecyclingLog).filter(
+        RecyclingLog.user_id == current_user.user_id
+    ).order_by(RecyclingLog.timestamp.desc()).all()
+    return logs
 
 @router.get("/leaderboard")
 def leaderboard(db: Session = Depends(get_db)):
@@ -51,13 +60,3 @@ def streak(
             break
         streak += 1
     return {"streak": streak}
-
-@router.get("/logs", response_model=list[LogOut])
-def get_user_logs(
-    current_user: TokenData = Depends(get_current_user),
-    db: Session = Depends(get_db),
-):
-    logs = db.query(RecyclingLog).filter(
-        RecyclingLog.user_id == current_user.user_id
-    ).order_by(RecyclingLog.timestamp.desc()).all()
-    return logs
