@@ -13,7 +13,7 @@ class User(Base):
     is_active = Column(Boolean, default=True)
     created_at = Column(DateTime, default=datetime.now)
 
-    logs = relationship("RecyclyingLog", back_populates="user")
+    logs = relationship("RecyclingLog", back_populates="user")
 
 class RecyclingLog(Base):
     __tablename__ = "recycling_logs"
