@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom'
+
 import Header from './Header';
 import api from '../api';
 
@@ -8,10 +10,12 @@ function Stats({ darkMode, setDarkMode}) {
     const [monthlyTotal, setMonthlyTotal] = useState(0);
     const [recycleLog, setRecycleLog] = useState([]);
 
+    const navigate = useNavigate();
+
     useEffect(() => {
         const token = localStorage.getItem('token');
         if (!token) {
-            window.location.href = '/login';
+            navigate('/auth/login');
             return;
         }
 
@@ -49,7 +53,7 @@ function Stats({ darkMode, setDarkMode}) {
             setWeeklyTotal(weekly.length);
         })
         .catch(err => console.error('Error fetching recycle logs:', err));
-    });
+    }, []);
 
     const getImpactMessage = (category) => {
         switch (category) {
