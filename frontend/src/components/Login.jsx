@@ -4,7 +4,7 @@ import Header from "./Header"
 import api from '../api';
 
 function Login({ darkMode, setDarkMode}) {
-    const [username, setUsername] = useState('');
+    const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
     const [loading, setLoading] = useState(false);
@@ -12,8 +12,8 @@ function Login({ darkMode, setDarkMode}) {
     const navigate = useNavigate();
 
     const validateForm = () => {
-        if (!username || !password) {
-            setError('Username and password are required.');
+        if (!email || !password) {
+            setError('Email and password are required.');
             return false;
         }
         setError('');
@@ -27,7 +27,7 @@ function Login({ darkMode, setDarkMode}) {
 
         try {
             const response = await api.post('/auth/login', {
-                username: username, 
+                email: email, 
                 password: password
             })
             localStorage.setItem('token', response.data.access_token);
@@ -73,11 +73,11 @@ function Login({ darkMode, setDarkMode}) {
         {error && <p className="text-red-500 mb-2">{error}</p>}
 
         <label className="block mb-2">
-            Username:
+            Email:
             <input
-            type="text"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
+            type="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
             disabled={loading}
             required
             className={inputClass}
