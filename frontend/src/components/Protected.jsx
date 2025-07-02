@@ -10,7 +10,7 @@ function ProtectedPage() {
     }
   }, [navigate]);
 
-  return Children;
+  return children;
 }
 
 export default ProtectedPage;
