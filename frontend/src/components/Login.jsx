@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify'
+
 import Header from "./Header"
 import api from '../api';
 
@@ -30,8 +32,10 @@ function Login({ darkMode, setDarkMode}) {
                 email: email, 
                 password: password
             })
+
+            toast.success('Logged in! Redirecting to Recyclo...');
             localStorage.setItem('token', response.data.access_token);
-            navigate('/stats');
+            navigate('/');
         } catch (error) {
             setLoading(false);
             setError('An error occurred: ' + error.message + ' Please try again later.');
