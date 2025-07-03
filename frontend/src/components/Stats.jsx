@@ -121,6 +121,11 @@ function Stats({ darkMode, setDarkMode }) {
     ${darkMode ? 'bg-gray-800 text-white border-gray-600' : 'bg-white text-gray-800 border-gray-300'}
   `;
 
+  const emptyStateText = `
+    text-center text-sm mt-4 italic 
+    text-gray-500 dark:text-gray-400
+  `;
+
   return (
     <div className={pageWrapperClasses}>
       <div className={containerClasses}>
@@ -144,7 +149,7 @@ function Stats({ darkMode, setDarkMode }) {
 
         <div>
           <h3 className="text-lg font-semibold mb-3 mt-4">🕒 Activity Log</h3>
-          <select className={selectClass} value={filter} onchange={(e) => setFilter(e.target.value)}>
+          <select className={selectClass} value={filter} onChange={(e) => setFilter(e.target.value)}>
             <option value="all">All</option>
             <option value="today">Today</option>
             <option value="yesterday">Yesterday</option>
@@ -152,14 +157,20 @@ function Stats({ darkMode, setDarkMode }) {
             <option value="month">This Month</option>
           </select>
 
-          <ul className="space-y-3">
-            {filterLogs(recycleLog, filter).map((log, i) => (
-              <li key={i} className={logCard}>
-                <p className={logDateText}>{formatTime(log.timestamp)}</p>
-                <p className="text-sm font-semibold mb-1">🗑️ {log.category}</p>
-              </li>
+          {filterLogs(recycleLog, filter).length === 0 ? (
+            <p className={emptyStateText}>
+              No logs found for selected filter.
+            </p>
+          ) : (
+            <ul className="space-y-3">
+              {filterLogs(recycleLog, filter).map((log, i) => (
+                <li key={i} className={logCard}>
+                  <p className={logDateText}>{formatTime(log.timestamp)}</p>
+                  <p className="text-sm font-semibold mb-1">🗑️ {log.category}</p>
+                </li>
             ))}
           </ul>
+          )}
         </div>
       </div>
     </div>
