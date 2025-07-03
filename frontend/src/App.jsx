@@ -2,12 +2,12 @@ import { useState } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 
-import Login from './components/Login';
 import Protected from './components/Protected';
 import MainApp from './components/MainApp';
 import Stats from './components/Stats';
 import Leaderboard from './components/Leaderboard';
 import Register from './components/Register';
+import Login from './components/Login';
 
 const getInitialDarkMode = () => {
   const stored = localStorage.getItem('darkMode');

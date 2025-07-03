@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-function ProtectedPage() {
+function ProtectedPage({ children }) {
   const navigate = useNavigate();
 
   useEffect(() => {
