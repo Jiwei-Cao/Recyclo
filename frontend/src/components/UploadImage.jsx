@@ -14,16 +14,31 @@ const UploadImage = ({ onResult, darkMode}) => {
         formData.append('file', file);
 
         try {
-            const response = await api.post('/predict', formData, {
+            const predictionResponse = await api.post('/predict', formData, {
                 headers: { 'Content-Type': 'multipart/form-data' },
             });
-            onResult(response.data);
-        } catch (error) {
-            console.error("Prediction error:", error);
+
+            const prediction = predictionResponse.data;
+            onResult(prediction);
+
+            const token = localStorage.getItem('token');
+            if (token && prediction.category) {
+                try {
+                    await api.post(
+                        '/logs/',
+                        { category: prediction.category },
+                        { headers: { Authorization: `Bearer ${token}` } }
+                    );
+                } catch (logErr) {
+                    console.warn('⚠️ Failed to save log:', logErr)
+                }
+            }
+        } catch (err) {
+            console.error('Prediction error:', err);
         } finally {
             setLoading(false);
         }
-    };
+    }
 
     const fileButtonLight = `
     py-2 px-6 rounded-full font-semibold
