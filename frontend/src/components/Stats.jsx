@@ -53,6 +53,11 @@ function Stats({ darkMode, setDarkMode}) {
       loadStats();
     }, [navigate]);
 
+    function formatTime(timestamp) {
+      const d = new Date(timestamp);
+      return d.toLocaleString();
+    }
+
     const getImpactMessage = (category) => {
         switch (category) {
         case 'plastic': return '🐢 You saved a turtle!';
