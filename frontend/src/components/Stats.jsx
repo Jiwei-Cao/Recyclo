@@ -79,38 +79,45 @@ function Stats({ darkMode, setDarkMode }) {
   `;
 
   const logDateText = `text-sm mb-1 font-medium`;
-  const impactMessageText = `text-xs text-green-600 dark:text-green-400`;
+
+  const pageWrapperClasses = `
+    min-h-screen w-full flex items-center justify-center 
+    px-4 transition-colors duration-300
+    ${darkMode ? 'bg-black' : 'bg-gray-100'}
+  `;
 
   return (
-    <div className={containerClasses}>
-      <Header darkMode={darkMode} setDarkMode={setDarkMode} />
-      <h2 className={titleClasses}>📊 Your Recycling Stats</h2>
+    <div className={pageWrapperClasses}>
+      <div className={containerClasses}>
+        <Header darkMode={darkMode} setDarkMode={setDarkMode} />
+        <h2 className={titleClasses}>📊 Your Recycling Stats</h2>
 
-      <div className="mb-6 space-y-2">
-        <div className={statItem}>
-          <span>🔥 Daily Streak:</span>
-          <span className="font-semibold">{dailyStreak} days</span>
+        <div className="mb-6 space-y-2">
+          <div className={statItem}>
+            <span>🔥 Daily Streak:</span>
+            <span className="font-semibold">{dailyStreak} days</span>
+          </div>
+          <div className={statItem}>
+            <span>📅 This Week:</span>
+            <span className="font-semibold">{weeklyTotal} items</span>
+          </div>
+          <div className={statItem}>
+            <span>🗓️ This Month:</span>
+            <span className="font-semibold">{monthlyTotal} items</span>
+          </div>
         </div>
-        <div className={statItem}>
-          <span>📅 This Week:</span>
-          <span className="font-semibold">{weeklyTotal} items</span>
-        </div>
-        <div className={statItem}>
-          <span>🗓️ This Month:</span>
-          <span className="font-semibold">{monthlyTotal} items</span>
-        </div>
-      </div>
 
-      <div>
-        <h3 className="text-lg font-semibold mb-3 mt-4">🕒 Activity Log</h3>
-        <ul className="space-y-3">
-          {recycleLog.map((log, i) => (
-            <li key={i} className={logCard}>
-              <p className={logDateText}>{formatTime(log.timestamp)}</p>
-              <p className="text-sm font-semibold mb-1">🗑️ {log.category}</p>
-            </li>
-          ))}
-        </ul>
+        <div>
+          <h3 className="text-lg font-semibold mb-3 mt-4">🕒 Activity Log</h3>
+          <ul className="space-y-3">
+            {recycleLog.map((log, i) => (
+              <li key={i} className={logCard}>
+                <p className={logDateText}>{formatTime(log.timestamp)}</p>
+                <p className="text-sm font-semibold mb-1">🗑️ {log.category}</p>
+              </li>
+            ))}
+          </ul>
+        </div>
       </div>
     </div>
   );

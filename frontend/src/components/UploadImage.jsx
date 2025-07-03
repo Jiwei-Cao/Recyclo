@@ -66,8 +66,8 @@ const UploadImage = ({ onResult, darkMode}) => {
     const buttonState = loading 
         ? 'opacity-50 cursor-not-allowed' 
         : darkMode
-        ? 'bg-green-500 text-gray-900 hover:bg-green-600 focus:ring-green-300'
-        : 'bg-green-600 text-white hover:bg-green-700 focus:ring-green-500'
+        ? 'bg-green-500 text-gray-900 hover:bg-green-600 focus:ring-green-300 cursor-pointer'
+        : 'bg-green-600 text-white hover:bg-green-700 focus:ring-green-500 cursor-pointer'
 
     const buttonClasses = `${buttonBase} ${buttonState}`
 
