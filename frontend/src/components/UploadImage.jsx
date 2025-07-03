@@ -22,11 +22,11 @@ const UploadImage = ({ onResult, darkMode}) => {
             onResult(prediction);
 
             const token = localStorage.getItem('token');
-            if (token && prediction.category) {
+            if (token && prediction.label) {
                 try {
                     await api.post(
                         '/logs/',
-                        { category: prediction.category },
+                        { category: prediction.label },
                         { headers: { Authorization: `Bearer ${token}` } }
                     );
                 } catch (logErr) {
