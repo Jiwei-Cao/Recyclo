@@ -9,6 +9,7 @@ function Stats({ darkMode, setDarkMode }) {
   const [weeklyTotal, setWeeklyTotal] = useState(0);
   const [monthlyTotal, setMonthlyTotal] = useState(0);
   const [recycleLog, setRecycleLog] = useState([]);
+  const [filter, setFilter] = useState('all');
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -57,6 +58,35 @@ function Stats({ darkMode, setDarkMode }) {
   function formatTime(timestamp) {
     const d = new Date(timestamp);
     return d.toLocaleString();
+  };
+
+  function filterLogs(logs, filter) {
+    const now = new Date();
+    return logs.filter((log) => {
+      const date = new Date(log.timestamp);
+
+      if (filter === 'today') {
+        return date.toDateString() === now.toDateString();
+      }
+
+      if (filter === 'yesterday') {
+        const yesterday = new Date();
+        yesterday.setDate(now.getDate() - 1);
+        return date.toDateString() === yesterday.toDateString();
+      }
+
+      if (filter === 'week') {
+        const startOfWeek = new Date(now);
+        startOfWeek.setDate(now.getDate() - now.getDay());
+        return date >= startOfWeek &&date <= now;
+      }
+
+      if (filter === 'month') {
+        return date.getMonth() === now.getMonth() && date.getFullYear() === now.getFullYear();
+      }
+
+      return true;
+    });
   }
 
   const containerClasses = `
@@ -86,6 +116,11 @@ function Stats({ darkMode, setDarkMode }) {
     ${darkMode ? 'bg-black' : 'bg-gray-100'}
   `;
 
+  const selectClass = `
+    w-full mb-4 px-3 py-2 text-sm rounded border 
+    ${darkMode ? 'bg-gray-800 text-white border-gray-600' : 'bg-white text-gray-800 border-gray-300'}
+  `;
+
   return (
     <div className={pageWrapperClasses}>
       <div className={containerClasses}>
@@ -109,8 +144,16 @@ function Stats({ darkMode, setDarkMode }) {
 
         <div>
           <h3 className="text-lg font-semibold mb-3 mt-4">🕒 Activity Log</h3>
+          <select className={selectClass} value={filter} onchange={(e) => setFilter(e.target.value)}>
+            <option value="all">All</option>
+            <option value="today">Today</option>
+            <option value="yesterday">Yesterday</option>
+            <option value="week">This Week</option>
+            <option value="month">This Month</option>
+          </select>
+
           <ul className="space-y-3">
-            {recycleLog.map((log, i) => (
+            {filterLogs(recycleLog, filter).map((log, i) => (
               <li key={i} className={logCard}>
                 <p className={logDateText}>{formatTime(log.timestamp)}</p>
                 <p className="text-sm font-semibold mb-1">🗑️ {log.category}</p>
