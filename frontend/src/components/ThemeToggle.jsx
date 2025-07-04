@@ -2,10 +2,10 @@ import React from 'react'
 
 export default function ThemeToggle({ darkMode, setDarkMode }) {
 
-  const wrapperClasses = `absolute top-4 right-4 flex items-center space-x-2`
+  const wrapperClasses = `flex items-center space-x-2`
 
   const iconClasses = `
-    text-sm transition-colors duration-300
+    text-2xl transition-colors duration-300
     ${darkMode ? 'text-gray-300' : 'text-gray-600'}
   `
 
