@@ -121,6 +121,10 @@ function Stats({ darkMode, setDarkMode }) {
     ${darkMode ? 'bg-gray-800 text-white border-gray-600' : 'bg-white text-gray-800 border-gray-300'}
   `;
 
+  const filterLogText = `
+      text-lg font-semibold mb-3 mt-4 transition-colors duration-300
+  `
+
   const emptyStateText = `
     text-center text-sm mt-4 italic 
     text-gray-500 dark:text-gray-400
@@ -148,7 +152,7 @@ function Stats({ darkMode, setDarkMode }) {
         </div>
 
         <div>
-          <h3 className="text-lg font-semibold mb-3 mt-4">🕒 Activity Log</h3>
+          <h3 className={filterLogText}>🕒 Activity Log</h3>
           <select className={selectClass} value={filter} onChange={(e) => setFilter(e.target.value)}>
             <option value="all">All</option>
             <option value="today">Today</option>
