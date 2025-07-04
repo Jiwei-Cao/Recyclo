@@ -1,4 +1,5 @@
 import React from 'react';
+import { useWindowSize } from '@react-hook/window-size';
 
 function capitalize(str) {
     return str.charAt(0).toUpperCase() + str.slice(1);
@@ -7,6 +8,8 @@ function capitalize(str) {
 const PredictionResult = ({ result, darkMode }) => {
     if (!result) return null;
 
+    const [width, height] = useWindowSize();
+    
     const isUnsure = result.confidence < 0.15;
 
     const containerClasses = `
@@ -26,6 +29,22 @@ const PredictionResult = ({ result, darkMode }) => {
     : `mt-2 ${darkMode ? 'text-gray-300' : 'text-gray-700'}
     `
 
+    const impactMessageText = `
+        mt-2 text-sm italic
+        ${darkMode ? 'text-green-400' : 'text-green-700'}
+    `
+    
+    const impactMap = {
+        plastic: 'You helped save a turtle 🐢',
+        glass: 'You reduced landfill waste ♻️',
+        metal: 'You saved enough energy to run a washing machine for an hour ⚡',
+        paper: 'You saved part of a tree 🌳',
+        cardboard: 'You helped protect forests 🌲',
+        trash: 'Please try to recycle next time 🚮',
+    };
+
+    const impactMessage = impactMap[prediction.label] || 'Small steps, big impact!';
+
 
     return (
         <div className={containerClasses}>
@@ -36,10 +55,15 @@ const PredictionResult = ({ result, darkMode }) => {
                     We're unable to confidently classify this image. Please try a clearer image.
                 </p>
             ) : (
-                <p className={messageClasses}>
-                    Detected Waste:{' '}
-                    <span className="font-bold">{capitalize(result.label)}</span>
-                </p>
+                <>
+                    <p className={messageClasses}>
+                        Detected Waste:{' '}
+                        <span className="font-bold">{capitalize(result.label)}</span>
+                    </p>
+                    <p className={impactMessageText}>
+                        {impactMessage}
+                    </p>
+                </>
             )}
         </div>
     );

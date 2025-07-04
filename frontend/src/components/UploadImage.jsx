@@ -9,6 +9,7 @@ const UploadImage = ({ onResult, darkMode}) => {
         e.preventDefault();
         if (!file) return;
         
+        onResult(null);
         setLoading(true);
         const formData = new FormData();
         formData.append('file', file);
