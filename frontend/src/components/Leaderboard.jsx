@@ -52,8 +52,8 @@ function Leaderboard({ darkMode, setDarkMode }) {
                 <p className={subheadingClass}>All-Time Recycling Stats</p>
 
                 <div className={headerRow}>
-                    <span>#</span>
-                    <span>Name</span>
+                    <span className="pr-1 text-right">#</span>
+                    <span className="flex items-center gap-2">Name</span>
                     <span className="text-right">♻️ Items Recycled</span>
                 </div>
 
