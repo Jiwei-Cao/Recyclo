@@ -30,45 +30,58 @@ export default function Header({ darkMode, setDarkMode }) {
   `;
 
   return (
-    <header className={headerClass}>
-      <div className={leftSectionClass}>
-        <button className={buttonClass} onClick={() => navigate("/")}>
-          🌱 Recyclo
-        </button>
+  <header className={headerClass}>
+    <div className={leftSectionClass}>
+      <button className={buttonClass} onClick={() => navigate("/")}>
+        🌱 Recyclo
+      </button>
 
-        <button className={buttonClass} onClick={() => navigate("/leaderboard")}>
-          👑 Global Leaderboard
-        </button>
-      </div>
+      <button className={buttonClass} onClick={() => navigate("/leaderboard")}>
+        👑 Global Leaderboard
+      </button>
+    </div>
 
-      <div className={rightSectionClass}>
-        <ThemeToggle darkMode={darkMode} setDarkMode={setDarkMode} />
-        
-        {token ? (
-          <button className={buttonClass} onClick={() => setMenuOpen(!menuOpen)}>
+    <div className={rightSectionClass}>
+      <ThemeToggle darkMode={darkMode} setDarkMode={setDarkMode} />
+
+      {token ? (
+        <div onMouseEnter={() => setMenuOpen(true)} onMouseLeave={() => setMenuOpen(false)} className="relative"
+        >
+          <span className="text-2xl font-bold hover:text-green-600 transition">
             👤 {username}
-          </button>
-        ) : (
-          <button className={buttonClass} onClick={() => navigate("/auth/login")}>
-            🔐 Login
-          </button>
-        )}
+          </span>
 
-        {menuOpen && token && (
-          <div className={dropdownClass}>
-            <div className={itemClass} onClick={() => { navigate("/stats"); setMenuOpen(false); }}>
-              📊 User Stats
+          {menuOpen && (
+            <div className={dropdownClass}>
+              <div
+                className={itemClass}
+                onClick={() => {
+                  navigate("/stats");
+                  setMenuOpen(false);
+                }}
+              >
+                📊 User Stats
+              </div>
+              <div
+                className={itemClass}
+                onClick={() => {
+                  localStorage.clear();
+                  setMenuOpen(false);
+                  navigate("/auth/login");
+                }}
+              >
+                🚪 Sign Out
+              </div>
             </div>
-            <div className={itemClass} onClick={() => {
-              localStorage.clear();
-              setMenuOpen(false);
-              navigate("/auth/login");
-            }}>
-              🚪 Sign Out
-            </div>
-          </div>
-        )}
-      </div>
-    </header>
-  );
-}
+          )}
+        </div>
+      ) : (
+        <button className={buttonClass} onClick={() => navigate("/auth/login")}>
+          🔐 Login
+        </button>
+      )}
+    </div>
+  </header>
+);
+
+export default Header;
