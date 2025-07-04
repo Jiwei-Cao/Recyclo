@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Header from './Header';
 import api from '../api';
+import { FaCrown } from 'react-icons/fa';
 
 function Leaderboard({ darkMode, setDarkMode }) {
     const [leaders, setleaders] = useState([]);
@@ -27,26 +28,45 @@ function Leaderboard({ darkMode, setDarkMode }) {
 
     const headingClass = `text-2xl font-bold mb-6 text-center`;
 
-    const leaderItemClass = `
-        p-4 rounded-lg border transition
-        ${darkMode 
-        ? 'bg-gray-800 border-gray-700 text-gray-200' 
-        : 'bg-gray-100 border-gray-300 text-gray-800'}
+    const subheadingClass = `text-sm text-center mb-6 text-gray-400`;
+
+    const headerRow = `
+        grid grid-cols-3 font-semibold text-sm border-b pb-2 mb-2
+        ${darkMode ? 'border-gray-700' : 'border-gray-300'}
     `;
+
+    const rowClass = `
+        grid grid-cols-3 items-center text-sm py-2 px-3 rounded
+        ${darkMode 
+        ? 'bg-gray-800 border border-gray-700 text-gray-100' 
+        : 'bg-gray-100 border border-gray-300 text-gray-800'}
+    `;
+
+    const crownClass = `text-yellow-400 animate-pulse`
 
     return (
         <div className={pageWrapperClasses}>
             <div className={containerClasses}>
                 <Header darkMode={darkMode} setDarkMode={setDarkMode} />
                 <h2 className={headingClass}>🏆 Global Leaderboard</h2>
+                <p className={subheadingClass}>All-Time Recycling Stats</p>
 
-                <ol className="space-y-3">
-                {leaders.map((entry, i) => (
-                    <li key={i} className={leaderItemClass}>
-                    <p className="text-sm font-semibold">{i + 1}. {entry.username}</p>
-                    <p className="text-sm text-green-500 dark:text-green-400">♻️ {entry.total} items recycled</p>
-                    </li>
-                ))}
+                <div className={headerRow}>
+                    <span>#</span>
+                    <span>Name</span>
+                    <span className="text-right">♻️ Items</span>
+                </div>
+
+                <ol className="space-y-2">
+                    {leaders.map((entry, i) => (
+                        <li key={i} className={rowClass}>
+                            <span>
+                                {i === 0 ? <FaCrown className={crownClass} /> : `${i + 1}`}
+                            </span>
+                            <span className="truncate">{entry.username}</span>
+                            <span className="text-right">{entry.total}</span>
+                        </li>
+                    ))}
                 </ol>
             </div>
         </div>
