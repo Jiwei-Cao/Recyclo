@@ -46,11 +46,15 @@ const PredictionResult = ({ result, darkMode }) => {
 
     const impactMessage = impactMap[result.label] || 'Small steps, big impact!';
 
+    const CelebrationConfetti = ({ width, height }) => (
+        <Confetti width={width} height={height} numberOfPieces={600} gravity={1} wind={0.05}
+            initialVelocityX={15} initialVelocityY={25} recycle={false} />
+    );
 
     return (
         <>
-            {!isUnsure && <Confetti width={width} height={height} numberOfPieces={150} recycle={false} />}
-            
+            {!isUnsure && <CelebrationConfetti width={width} height={height} />}
+
             <div className={containerClasses}>
                 <h2 className={titleClasses}>Prediction Result</h2>
 
