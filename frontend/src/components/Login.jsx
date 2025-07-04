@@ -35,6 +35,7 @@ function Login({ darkMode, setDarkMode}) {
 
             toast.success('Logged in! Redirecting to Recyclo...');
             localStorage.setItem('token', response.data.access_token);
+            localStorage.setItem('username', response.data.username);
             navigate('/');
         } catch (error) {
             setLoading(false);

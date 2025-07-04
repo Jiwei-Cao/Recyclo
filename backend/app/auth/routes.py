@@ -36,4 +36,4 @@ def login(data: LoginInput, db: Session = Depends(get_db)):
         "email": user.email
     }, expires_delta=timedelta(days=1))
 
-    return TokenOut(access_token=token)
+    return TokenOut(access_token=token, username=user.username)

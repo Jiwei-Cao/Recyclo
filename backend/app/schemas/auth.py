@@ -12,6 +12,7 @@ class LoginInput(BaseModel):
 class TokenOut(BaseModel):
     access_token: str
     token_type: str = "bearer"
+    username: str
 
 class TokenDataOut(BaseModel):
     user_id: int
