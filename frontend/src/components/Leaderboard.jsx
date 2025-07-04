@@ -26,17 +26,17 @@ function Leaderboard({ darkMode, setDarkMode }) {
         : 'bg-white border-gray-200 text-gray-800 shadow-md'}
     `;
 
-    const headingClass = `text-2xl font-bold mb-6 text-center`;
+    const headingClass = `text-2xl font-bold text-center mb-2`;
 
-    const subheadingClass = `text-sm text-center mb-6 text-gray-400`;
+    const subheadingClass = `text-sm text-center mb-4 text-gray-400`;
 
     const headerRow = `
-        grid grid-cols-3 font-semibold text-sm border-b pb-2 mb-2
+        grid grid-cols-[auto_minmax(0,1fr)_auto] gap-3 font-semibold text-sm border-b pb-2 mb-2
         ${darkMode ? 'border-gray-700' : 'border-gray-300'}
     `;
 
     const rowClass = `
-        grid grid-cols-3 items-center text-sm py-2 px-3 rounded
+        grid grid-cols-[auto_minmax(0,1fr)_auto] gap-3 items-center text-sm py-2 px-3 rounded
         ${darkMode 
         ? 'bg-gray-800 border border-gray-700 text-gray-100' 
         : 'bg-gray-100 border border-gray-300 text-gray-800'}
@@ -54,16 +54,16 @@ function Leaderboard({ darkMode, setDarkMode }) {
                 <div className={headerRow}>
                     <span>#</span>
                     <span>Name</span>
-                    <span className="text-right">♻️ Items</span>
+                    <span className="text-right">♻️ Items Recycled</span>
                 </div>
 
                 <ol className="space-y-2">
                     {leaders.map((entry, i) => (
                         <li key={i} className={rowClass}>
                             <span>
-                                {i === 0 ? <FaCrown className={crownClass} /> : `${i + 1}`}
+                                {i === 0 ? <FaCrown className={crownClass} /> : i + 1}
                             </span>
-                            <span className="truncate">{entry.username}</span>
+                            <span className="flex items-center gap-2 truncate">{entry.username}</span>
                             <span className="text-right">{entry.total}</span>
                         </li>
                     ))}
