@@ -21,7 +21,7 @@ export default function Header({ darkMode, setDarkMode }) {
   `
 
   const dropdownClass = `
-    absolute right-0 top-16 mt-2 w-52 rounded-md 
+    absolute right-0 top-full mt-1 w-52 rounded-md 
     shadow-lg z-50
     ${darkMode ? "bg-gray-800 text-gray-100" : "bg-white text-gray-800 border border-gray-300"}
   `;
@@ -45,7 +45,7 @@ export default function Header({ darkMode, setDarkMode }) {
 
       <div className={rightSectionClass}>
         <div 
-          className="relative"
+          className="relative mr-2"
           onMouseEnter={() => token && setMenuOpen(true)}
           onMouseLeave={() => token && setMenuOpen(false)}
         >
