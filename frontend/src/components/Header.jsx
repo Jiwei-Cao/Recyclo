@@ -13,7 +13,7 @@ export default function Header({ darkMode, setDarkMode }) {
   `
 
   const leftSectionClass = `flex items-center gap-12`
-  const rightSectionClass = `flex items-center gap-6 relative`
+  const rightSectionClass = `flex items-center gap-2 relative`
 
   const buttonClass = `
     text-2xl font-bold hover:text-green-600 
@@ -44,18 +44,15 @@ export default function Header({ darkMode, setDarkMode }) {
       </div>
 
       <div className={rightSectionClass}>
-        <div
+        <div 
           className="relative"
-          onMouseEnter={() => setMenuOpen(true)}
-          onMouseLeave={() => setMenuOpen(false)}
+          onMouseEnter={() => token && setMenuOpen(true)}
+          onMouseLeave={() => token && setMenuOpen(false)}
         >
-          <span
-            className={`text-2xl font-bold hover:text-green-600 transition ${
+          <span className={`text-2xl font-bold hover:text-green-600 transition ${
               token ? "cursor-default" : "cursor-pointer"
             }`}
-            onClick={() => {
-              if (!token) navigate("/auth/login");
-            }}
+            onClick={() => !token && navigate("/auth/login")}
           >
             👤 {token ? username : "Login"}
           </span>
