@@ -1,5 +1,6 @@
 import React from 'react';
 import { useWindowSize } from '@react-hook/window-size';
+import Confetti from 'react-confetti';
 
 function capitalize(str) {
     return str.charAt(0).toUpperCase() + str.slice(1);
@@ -47,25 +48,29 @@ const PredictionResult = ({ result, darkMode }) => {
 
 
     return (
-        <div className={containerClasses}>
-            <h2 className={titleClasses}>Prediction Result</h2>
+        <>
+            {!isUnsure && <Confetti width={width} height={height} numberOfPieces={150} recycle={false} />}
+            
+            <div className={containerClasses}>
+                <h2 className={titleClasses}>Prediction Result</h2>
 
-            {isUnsure ? (
-                <p className={messageClasses}>
-                    We're unable to confidently classify this image. Please try a clearer image.
-                </p>
-            ) : (
-                <>
+                {isUnsure ? (
                     <p className={messageClasses}>
-                        Detected Waste:{' '}
-                        <span className="font-bold">{capitalize(result.label)}</span>
+                        We're unable to confidently classify this image. Please try a clearer image.
                     </p>
-                    <p className={impactMessageText}>
-                        {impactMessage}
-                    </p>
-                </>
-            )}
-        </div>
+                ) : (
+                    <>
+                        <p className={messageClasses}>
+                            Detected Waste:{' '}
+                            <span className="font-bold">{capitalize(result.label)}</span>
+                        </p>
+                        <p className={impactMessageText}>
+                            {impactMessage}
+                        </p>
+                    </>
+                )}
+            </div>
+        </>
     );
 };
 
