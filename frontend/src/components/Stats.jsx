@@ -117,7 +117,7 @@ function Stats({ darkMode, setDarkMode }) {
   `;
 
   const selectClass = `
-    w-full mb-4 px-3 py-2 text-sm rounded border 
+    w-full mb-4 px-3 py-2 text-sm rounded border transition-colors duration-300
     ${darkMode ? 'bg-gray-800 text-white border-gray-600' : 'bg-white text-gray-800 border-gray-300'}
   `;
 
