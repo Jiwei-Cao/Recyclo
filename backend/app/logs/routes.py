@@ -51,8 +51,9 @@ def streak(
 ):
     today = date.today()
     streak = 0
+    day = today - timedelta(days=1)
+
     while True:
-        day = today - timedelta(days=streak)
         exists = db.query(RecyclingLog).filter(
             RecyclingLog.user_id == current_user.user_id,
             func.date(RecyclingLog.timestamp) == day
@@ -60,4 +61,14 @@ def streak(
         if not exists:
             break
         streak += 1
+        day -= timedelta(days=1)
+
+    today_log = db.query(RecyclingLog).filter(
+        RecyclingLog.user_id == current_user.user_id,
+        func.date(RecyclingLog.timestamp) == today
+    ).first()
+
+    if today_log: 
+        streak += 1
+        
     return {"streak": streak}
