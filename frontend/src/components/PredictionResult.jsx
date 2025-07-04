@@ -43,7 +43,7 @@ const PredictionResult = ({ result, darkMode }) => {
         trash: 'Please try to recycle next time 🚮',
     };
 
-    const impactMessage = impactMap[prediction.label] || 'Small steps, big impact!';
+    const impactMessage = impactMap[result.label] || 'Small steps, big impact!';
 
 
     return (
