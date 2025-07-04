@@ -6,7 +6,7 @@ function Leaderboard({ darkMode, setDarkMode }) {
     const [leaders, setleaders] = useState([]);
 
     useEffect(() => {
-        api.get('/leaderboard')
+        api.get('/logs/leaderboard')
             .then(res => setleaders(res.data))
             .catch(err => console.error('Error fetching leaderboard:', err));
     }, []);
