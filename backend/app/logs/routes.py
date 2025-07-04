@@ -34,12 +34,13 @@ def get_user_logs(
 
 @router.get("/leaderboard")
 def leaderboard(db: Session = Depends(get_db)):
-    rows = (db.query(User.username, func.count(RecyclingLog.id).label("total"))
-            .join(RecyclingLog)
-            .group_by(User.id)
-            .order_by(func.count(RecyclingLog.id).desc())
-            .limit(10)
-            .all()
+    rows = (
+        db.query(User.username, func.count(RecyclingLog.id).label("total"))
+        .join(RecyclingLog, RecyclingLog.user_id == User.id)
+        .group_by(User.id)
+        .order_by(func.count(RecyclingLog.id).desc())
+        .limit(10)
+        .all()
     )
     return [{"username": row.username, "total": row.total} for row in rows]
 
