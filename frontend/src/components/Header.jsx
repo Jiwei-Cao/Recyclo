@@ -83,5 +83,3 @@ export default function Header({ darkMode, setDarkMode }) {
     </div>
   </header>
 );
-
-export default Header;
