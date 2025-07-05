@@ -64,7 +64,7 @@ export default function Header({ darkMode, setDarkMode }) {
           <span className={dropdownButton}
             onClick={() => !token && navigate("/auth/login")}
           >
-            👤 <span className={buttonText}>{token ? username : "Login"}</span>
+            👨‍💼 <span className={buttonText}>{token ? username : "Login"}</span>
           </span>
 
           {token && menuOpen && (

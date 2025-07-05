@@ -18,13 +18,13 @@ function MainApp({ darkMode, setDarkMode }) {
   const containerClasses = `${baseContainer} ${darkMode ? darkContainer : lightContainer}`
 
   const headingClass = `
-    text-2xl sm:text-3xl font-bold mb-4 sm:mb-5
+    text-3xl sm:text-4xl font-bold mb-4 sm:mb-5
     transition-colors duration-300
     ${darkMode ? 'text-green-400' : 'text-green-600'}
   `
 
   const aboutClass = `
-    text-center text-sm sm:text-base mb-6 max-w-xl 
+    text-center text-sm sm:text-base mb-4 max-w-xl 
     transition-colors duration-300
     ${darkMode ? 'text-gray-300' : 'text-gray-700'}
   `
