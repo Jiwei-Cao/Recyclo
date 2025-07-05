@@ -32,15 +32,19 @@ export default function Header({ darkMode, setDarkMode }) {
     flex items-center gap-2
   `;
 
+  const buttonText = `
+    hidden md:inline
+  `;
+
   return (
     <header className={headerClass}>
       <div className={leftSectionClass}>
         <button className={buttonClass} onClick={() => navigate("/")}>
-          🌱 Recyclo
+          🌱 <span className={buttonText}>Recyclo</span>
         </button>
 
         <button className={buttonClass} onClick={() => navigate("/leaderboard")}>
-          👑 Global Leaderboard
+          👑 <span className={buttonText}>Global Leaderboard</span>
         </button>
       </div>
 
@@ -55,7 +59,7 @@ export default function Header({ darkMode, setDarkMode }) {
             }`}
             onClick={() => !token && navigate("/auth/login")}
           >
-            👤 {token ? username : "Login"}
+            👤 <span className={buttonText}>{token ? username : "Login"}</span>
           </span>
 
           {token && menuOpen && (
