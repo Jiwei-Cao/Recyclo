@@ -12,7 +12,7 @@ from app.auth.dependencies import get_current_user
 
 router = APIRouter()
 
-@router.post("/", response_model=LogOut)
+@router.post("", response_model=LogOut)
 def add_log(
     data: LogIn,
     current_user: TokenData = Depends(get_current_user),
@@ -22,7 +22,7 @@ def add_log(
     db.add(log); db.commit(); db.refresh(log)
     return log
 
-@router.get("/", response_model=list[LogOut])
+@router.get("", response_model=list[LogOut])
 def get_user_logs(
     current_user: TokenData = Depends(get_current_user),
     db: Session = Depends(get_db),

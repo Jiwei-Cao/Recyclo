@@ -19,8 +19,8 @@ function Stats({ darkMode, setDarkMode }) {
 
       try {
         const [streakRes, logsRes] = await Promise.all([
-          api.get('/logs/streak/', { headers }),
-          api.get('/logs/', { headers }),
+          api.get('/logs/streak', { headers }),
+          api.get('/logs', { headers }),
         ]);
 
         setDailyStreak(streakRes.data.streak);
