@@ -29,6 +29,7 @@ export default function Header({ darkMode, setDarkMode }) {
   const itemClass = `
     px-3 py-2 text-sm hover:bg-green-500 
     hover:text-white cursor-pointer first:rounded-t-md last:rounded-b-md
+    flex items-center gap-2
   `;
 
   return (
