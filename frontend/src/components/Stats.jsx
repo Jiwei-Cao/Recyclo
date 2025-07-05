@@ -122,13 +122,17 @@ function Stats({ darkMode, setDarkMode }) {
   `;
 
   const filterLogText = `
-      text-lg font-semibold mb-3 mt-4 transition-colors duration-300
+    text-lg font-semibold mb-3 mt-4 transition-colors duration-300
   `
 
   const emptyStateText = `
     text-center text-sm mt-4 italic 
     text-gray-500 dark:text-gray-400
   `;
+
+  const logsList = `
+  space y-3 transition-colors duration-300
+  `
 
   return (
     <div className={pageWrapperClasses}>
@@ -166,7 +170,7 @@ function Stats({ darkMode, setDarkMode }) {
               No logs found for selected filter.
             </p>
           ) : (
-            <ul className="space-y-3">
+            <ul className={logsList}>
               {filterLogs(recycleLog, filter).map((log, i) => (
                 <li key={i} className={logCard}>
                   <p className={logDateText}>{formatTime(log.timestamp)}</p>
