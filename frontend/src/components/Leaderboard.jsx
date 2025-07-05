@@ -44,7 +44,7 @@ function Leaderboard({ darkMode, setDarkMode }) {
         : 'bg-gray-100 border border-gray-300 text-gray-800'}
     `;
 
-    const crownClass = `text-yellow-400 animate-pulse`
+    const crownClass = `text-yellow-400 animate-pulse -ml-1`
 
     return (
         <div className={pageWrapperClasses}>
@@ -54,7 +54,7 @@ function Leaderboard({ darkMode, setDarkMode }) {
                 <p className={subheadingClass}>All-Time Recycling Stats</p>
 
                 <div className={headerRow}>
-                    <span className="pl-1">#</span>
+                    <span className="pl-3">#</span>
                     <span>Name</span>
                     <span className="text-right">♻️ Items Recycled</span>
                 </div>
