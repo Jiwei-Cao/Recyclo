@@ -36,6 +36,13 @@ export default function Header({ darkMode, setDarkMode }) {
     hidden md:inline
   `;
 
+  const dropdown = `relative mr-2`
+
+  const dropdownButton = `
+    text-2xl font-bold hover:text-green-600 transition 
+    ${token ? "cursor-default" : "cursor-pointer"}
+  `
+
   return (
     <header className={headerClass}>
       <div className={leftSectionClass}>
@@ -50,13 +57,11 @@ export default function Header({ darkMode, setDarkMode }) {
 
       <div className={rightSectionClass}>
         <div 
-          className="relative mr-2"
+          className={dropdown}
           onMouseEnter={() => token && setMenuOpen(true)}
           onMouseLeave={() => token && setMenuOpen(false)}
         >
-          <span className={`text-2xl font-bold hover:text-green-600 transition ${
-              token ? "cursor-default" : "cursor-pointer"
-            }`}
+          <span className={dropdownButton}
             onClick={() => !token && navigate("/auth/login")}
           >
             👤 <span className={buttonText}>{token ? username : "Login"}</span>

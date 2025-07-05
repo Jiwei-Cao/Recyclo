@@ -1,7 +1,6 @@
 import React from 'react'
 
-export default function ThemeToggle({ darkMode, setDarkMode }) {
-
+function ThemeToggle({ darkMode, setDarkMode }) {
   const wrapperClasses = `flex items-center space-x-2`
 
   const iconClasses = `
@@ -44,4 +43,6 @@ export default function ThemeToggle({ darkMode, setDarkMode }) {
       <span className={iconClasses}>🌙</span>
     </div>
   )
-}
+};
+
+export default ThemeToggle;

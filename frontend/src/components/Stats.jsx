@@ -102,13 +102,15 @@ function Stats({ darkMode, setDarkMode }) {
   const statItem = `flex justify-between text-sm sm:text-base`;
 
   const logCard = `
-    p-4 rounded-lg border transition
+    p-4 rounded-lg border transition-colors duration-300
     ${darkMode 
       ? 'bg-gray-800 border-gray-700 text-gray-200' 
       : 'bg-gray-100 border-gray-300 text-gray-800'}
   `;
 
   const logDateText = `text-sm mb-1 font-medium`;
+
+  const logCategoryText = `text-sm font-semibold mb-1`
 
   const pageWrapperClasses = `
     min-h-screen w-full flex items-center justify-center 
@@ -134,6 +136,8 @@ function Stats({ darkMode, setDarkMode }) {
   space y-3 transition-colors duration-300
   `
 
+  const totalText = `font-semibold`
+
   return (
     <div className={pageWrapperClasses}>
       <div className={containerClasses}>
@@ -143,15 +147,15 @@ function Stats({ darkMode, setDarkMode }) {
         <div className="mb-6 space-y-2">
           <div className={statItem}>
             <span>🔥 Daily Streak:</span>
-            <span className="font-semibold">{dailyStreak} days</span>
+            <span className={totalText}>{dailyStreak} days</span>
           </div>
           <div className={statItem}>
             <span>📅 This Week:</span>
-            <span className="font-semibold">{weeklyTotal} items</span>
+            <span className={totalText}>{weeklyTotal} items</span>
           </div>
           <div className={statItem}>
             <span>🗓️ This Month:</span>
-            <span className="font-semibold">{monthlyTotal} items</span>
+            <span className={totalText}>{monthlyTotal} items</span>
           </div>
         </div>
 
@@ -174,7 +178,7 @@ function Stats({ darkMode, setDarkMode }) {
               {filterLogs(recycleLog, filter).map((log, i) => (
                 <li key={i} className={logCard}>
                   <p className={logDateText}>{formatTime(log.timestamp)}</p>
-                  <p className="text-sm font-semibold mb-1">🗑️ {log.category}</p>
+                  <p className={logCategoryText}>🗑️ {log.category}</p>
                 </li>
             ))}
           </ul>

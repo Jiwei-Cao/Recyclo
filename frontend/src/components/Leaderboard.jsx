@@ -46,6 +46,8 @@ function Leaderboard({ darkMode, setDarkMode }) {
 
     const crownClass = `text-yellow-400 animate-pulse -ml-1`
 
+    const usernameText = `flex items-center gap-2 truncate`
+
     return (
         <div className={pageWrapperClasses}>
             <div className={containerClasses}>
@@ -65,7 +67,7 @@ function Leaderboard({ darkMode, setDarkMode }) {
                             <span>
                                 {i === 0 ? <FaCrown className={crownClass} /> : i + 1}
                             </span>
-                            <span className="flex items-center gap-2 truncate">{entry.username}</span>
+                            <span className={usernameText}>{entry.username}</span>
                             <span className="text-right">{entry.total}</span>
                         </li>
                     ))}
