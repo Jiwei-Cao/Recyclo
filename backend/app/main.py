@@ -7,7 +7,7 @@ from app.auth.routes import router as auth_router
 from app.predict.routes import router as predict_router
 from app.logs.routes import router as logs_router
 
-app = FastAPI()
+app = FastAPI(redirect_slashes=False)
 
 Base.metadata.create_all(bind=engine)
 
