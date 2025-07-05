@@ -82,7 +82,6 @@ export default function Header({ darkMode, setDarkMode }) {
           )}
         </div>
 
-        {/* Dark mode toggle */}
         <ThemeToggle darkMode={darkMode} setDarkMode={setDarkMode} />
       </div>
     </header>

@@ -32,6 +32,7 @@ function Leaderboard({ darkMode, setDarkMode }) {
 
     const headerRow = `
         grid grid-cols-[auto_minmax(0,1fr)_auto] gap-3 font-semibold text-sm border-b pb-2 mb-2
+        transition-colors duration-300
         ${darkMode ? 'border-gray-700' : 'border-gray-300'}
     `;
 
