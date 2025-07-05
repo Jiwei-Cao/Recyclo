@@ -38,6 +38,7 @@ function Leaderboard({ darkMode, setDarkMode }) {
 
     const rowClass = `
         grid grid-cols-[auto_minmax(0,1fr)_auto] gap-3 items-center text-sm py-2 px-3 rounded
+        transition-colors duration-300
         ${darkMode 
         ? 'bg-gray-800 border border-gray-700 text-gray-100' 
         : 'bg-gray-100 border border-gray-300 text-gray-800'}
