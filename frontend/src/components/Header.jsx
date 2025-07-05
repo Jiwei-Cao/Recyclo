@@ -47,7 +47,7 @@ export default function Header({ darkMode, setDarkMode }) {
     <header className={headerClass}>
       <div className={leftSectionClass}>
         <button className={buttonClass} onClick={() => navigate("/")}>
-          🌱 <span className={buttonText}>Recyclo</span>
+          🌳 <span className={buttonText}>Recyclo</span>
         </button>
 
         <button className={buttonClass} onClick={() => navigate("/leaderboard")}>
