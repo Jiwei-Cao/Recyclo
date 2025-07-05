@@ -21,8 +21,8 @@ export default function Header({ darkMode, setDarkMode }) {
   `
 
   const dropdownClass = `
-    absolute right-0 top-full mt-1 w-48 rounded-md 
-    shadow-lg z-50 before:content-[''] before:absolute before:-top-2 before:left-0 before:w-full before:h-2
+    absolute right-0 top-full w-48 rounded-md 
+    shadow-lg z-50
     ${darkMode ? "bg-gray-800 text-gray-100" : "bg-white text-gray-800 border border-gray-300"}
   `;
 
