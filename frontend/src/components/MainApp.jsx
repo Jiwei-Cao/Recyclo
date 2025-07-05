@@ -18,9 +18,15 @@ function MainApp({ darkMode, setDarkMode }) {
   const containerClasses = `${baseContainer} ${darkMode ? darkContainer : lightContainer}`
 
   const headingClass = `
-    text-2xl sm:text-3xl font-bold mb-4 sm:mb-6 
+    text-2xl sm:text-3xl font-bold mb-4 sm:mb-5
     transition-colors duration-300
     ${darkMode ? 'text-green-400' : 'text-green-600'}
+  `
+
+  const aboutClass = `
+    text-center text-sm sm:text-base mb-6 max-w-xl 
+    transition-colors duration-300
+    ${darkMode ? 'text-gray-300' : 'text-gray-700'}
   `
 
   return (
@@ -30,6 +36,11 @@ function MainApp({ darkMode, setDarkMode }) {
       <h1 className={headingClass}>
         ♻️ Recyclo Waste Classifier
       </h1>
+
+      <p className={aboutClass}>
+        Recyclo helps you identify recyclable waste using AI. <br />
+        Upload an image. Track your stats. Compete on the leaderboard.
+      </p>
 
       <UploadImage onResult={setPrediction} darkMode={darkMode}/>
       <PredictionResult result={prediction} darkMode={darkMode}/>
