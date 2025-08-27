@@ -5,16 +5,16 @@ Users can upload images, get predictions, and compete on a global leaderboard.
 
 ## 🛠 Built With
 
-[![React](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)](https://reactjs.org/)
-[![Vite](https://img.shields.io/badge/Vite-646CFF?style=for-the-badge&logo=vite&logoColor=white)](https://vitejs.dev/)
-[![TailwindCSS](https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)](https://tailwindcss.com/)
-[![FastAPI](https://img.shields.io/badge/FastAPI-005571?style=for-the-badge&logo=fastapi)](https://fastapi.tiangolo.com/)
-[![SQLAlchemy](https://img.shields.io/badge/SQLAlchemy-8B0000?style=for-the-badge&logo=databricks&logoColor=white)](https://www.sqlalchemy.org/)
-[![Alembic](https://img.shields.io/badge/Alembic-5A5A5A?style=for-the-badge)](https://alembic.sqlalchemy.org/)
-[![PyTorch](https://img.shields.io/badge/PyTorch-EE4C2C?style=for-the-badge&logo=pytorch&logoColor=white)](https://pytorch.org/)
-[![Docker](https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white)](https://www.docker.com/)
-[![Render](https://img.shields.io/badge/Render-46E3B7?style=for-the-badge&logo=render&logoColor=black)](https://render.com/)
-[![Vercel](https://img.shields.io/badge/Vercel-000000?style=for-the-badge&logo=vercel&logoColor=white)](https://vercel.com/)
+[![React](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)](https://reactjs.org/)  
+[![Vite](https://img.shields.io/badge/Vite-646CFF?style=for-the-badge&logo=vite&logoColor=white)](https://vitejs.dev/)  
+[![TailwindCSS](https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)](https://tailwindcss.com/)  
+[![FastAPI](https://img.shields.io/badge/FastAPI-005571?style=for-the-badge&logo=fastapi)](https://fastapi.tiangolo.com/)  
+[![SQLAlchemy](https://img.shields.io/badge/SQLAlchemy-8B0000?style=for-the-badge&logo=databricks&logoColor=white)](https://www.sqlalchemy.org/)  
+[![Alembic](https://img.shields.io/badge/Alembic-5A5A5A?style=for-the-badge)](https://alembic.sqlalchemy.org/)  
+[![PyTorch](https://img.shields.io/badge/PyTorch-EE4C2C?style=for-the-badge&logo=pytorch&logoColor=white)](https://pytorch.org/)  
+[![Docker](https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white)](https://www.docker.com/)  
+[![Render](https://img.shields.io/badge/Render-46E3B7?style=for-the-badge&logo=render&logoColor=black)](https://render.com/)  
+[![Vercel](https://img.shields.io/badge/Vercel-000000?style=for-the-badge&logo=vercel&logoColor=white)](https://vercel.com/)  
 [![JWT](https://img.shields.io/badge/JWT-000000?style=for-the-badge&logo=jsonwebtokens&logoColor=white)](https://jwt.io/)
 
 ## 🔗 Live Demo
@@ -31,32 +31,36 @@ This section explains how to run Recyclo locally.
 - Python 3.10+  
 - Git  
 
-### 🛠️ Installation
+## 🛠️ Installation
 
-1. Clone the repo  
+### 1. Clone the repo
 ```bash
 git clone https://github.com/Jiwei-Cao/Recyclo
+cd Recyclo
 ```
 
-2. Frontend Setup  
-```bash
-cd frontend
-npm install
-npm run dev
-```
-
-3. Backend Setup  
+### 2. Backend Setup
 ```bash
 cd backend
 python3 -m venv venv
-source venv/bin/activate  # venv\Scripts\activate on Windows
+source venv/bin/activate  # On Windows: venv\Scripts\activate
 pip install -r requirements.txt
-alembic upgrade head
-uvicorn app.main:app --reload
 ```
 
-4. Configure allowed origins (CORS)  
-Make sure `localhost:3000` is allowed in your FastAPI backend:
+### 3. Configure environment variables
+Create a `.env` file in the `backend/` directory:
+```env
+DATABASE_URL=sqlite:///./app.db
+SECRET_KEY=your-secret-key
+```
+
+### 4. Run database migrations
+```bash
+alembic upgrade head
+```
+
+### 5. Allow frontend in CORS settings
+In `app/main.py`, set:
 ```python
 origins = [
     "http://localhost:3000",
@@ -64,18 +68,22 @@ origins = [
 ]
 ```
 
-5. (Optional) Change git remote if you forked this repo  
+### 6. Start the backend server
 ```bash
-git remote set-url origin https://github.com/Jiwei-Cao/Recyclo
-git remote -v
+uvicorn app.main:app --reload
 ```
 
-## 📁 Environment Variables
+### 7. Frontend Setup
+```bash
+cd ../frontend
+npm install
+npm run dev
+```
 
-Create a `.env` file in `backend/` with:
-```env
-DATABASE_URL=sqlite:///./app.db
-SECRET_KEY=your-secret-key
+### 8. (Optional) Change Git Remote if Forked
+```bash
+git remote set-url origin https://github.com/YOUR-USERNAME/Recyclo
+git remote -v
 ```
 
 ## 🧪 Features
